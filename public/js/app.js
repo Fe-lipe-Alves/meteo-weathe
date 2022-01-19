@@ -2060,7 +2060,45 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // ----------------------    CONSTANTES    ----------------------
+// Elementos
+
+
+var searchInput = document.getElementById('search-input'),
+    searchResults = document.getElementById('search-results'); // Funções
+
+var searchVisible = function searchVisible(visible) {
+  var inputActive = ['bg-white', 'text-black', 'placeholder-slate-400'],
+      inputInactive = ['bg-white/50', 'text-white', 'placeholder-white'],
+      resultsActive = ['hidden'];
+
+  if (visible) {
+    var _searchInput$classLis, _searchInput$classLis2, _searchResults$classL;
+
+    (_searchInput$classLis = searchInput.classList).remove.apply(_searchInput$classLis, inputInactive);
+
+    (_searchInput$classLis2 = searchInput.classList).add.apply(_searchInput$classLis2, inputActive);
+
+    (_searchResults$classL = searchResults.classList).remove.apply(_searchResults$classL, resultsActive);
+  } else {
+    var _searchInput$classLis3, _searchInput$classLis4, _searchResults$classL2;
+
+    (_searchInput$classLis3 = searchInput.classList).add.apply(_searchInput$classLis3, inputInactive);
+
+    (_searchInput$classLis4 = searchInput.classList).remove.apply(_searchInput$classLis4, inputActive);
+
+    (_searchResults$classL2 = searchResults.classList).add.apply(_searchResults$classL2, resultsActive);
+  }
+}; // ----------------------    EVENTOS    ----------------------
+// Pesquisa
+
+
+searchInput.addEventListener('focus', function () {
+  return searchVisible(true);
+});
+searchInput.addEventListener('blur', function () {
+  return searchVisible(false);
+});
 
 /***/ }),
 
