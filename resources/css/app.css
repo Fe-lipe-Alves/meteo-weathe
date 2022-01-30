@@ -12,3 +12,27 @@ html, body, #app {
 .text-shadow{
     filter: drop-shadow(0px 1px 1px rgba(255, 255, 255, 0.45));
 }
+
+/*
+    Personalizando o Scroll
+ */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: --var(scroll-color) transparent;
+    --scroll-color: #C8C8C8;
+}
+
+*::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-color);
+    border-radius: 20px;
+}
