@@ -6,7 +6,7 @@
             <p class="text-center text-sm">DOM</p>
 
             <div class="flex justify-center pt-3">
-                <img src="/images/icons/weather/42081_rain_partly_cloudy_large.png" alt="Dia chuvoso" class="w-12">
+                <img src="/images/icons/weather/42081_rain_partly_cloudy_large.webp" alt="Dia chuvoso" class="w-12">
             </div>
 
             <div class="flex justify-center py-4">

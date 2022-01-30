@@ -41,7 +41,7 @@ export default {
 <style>
     body {
         background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-                          url('/images/backgrounds/background-002.jpg');
+                          url('/images/backgrounds/background-005.webp');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

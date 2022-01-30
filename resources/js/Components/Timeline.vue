@@ -17,7 +17,7 @@
                     </div>
                     <div class="details flex flex-col justify-center text-center py-4 px-4">
                         <div class="flex flex-col justify-center my-2">
-                            <img src="/images/icons/weather/42081_rain_partly_cloudy_large.png" alt="Dia chuvoso" class="w-12">
+                            <img src="/images/icons/weather/42081_rain_partly_cloudy_large.webp" alt="Dia chuvoso" class="w-12">
                         </div>
 
                         <div class="text-sm my-1">85%</div>

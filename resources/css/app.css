@@ -13,9 +13,7 @@ html, body, #app {
     filter: drop-shadow(0px 1px 1px rgba(255, 255, 255, 0.45));
 }
 
-/*
-    Personalizando o Scroll
- */
+/* Personalizando o Scroll */
 
 * {
     scrollbar-width: thin;
@@ -26,6 +24,10 @@ html, body, #app {
 *::-webkit-scrollbar {
     width: 7px;
     height: 7px;
+}
+
+@media screen {
+
 }
 
 *::-webkit-scrollbar-track {

@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::middleware('cache.headers:public;max_age=86400;etag')->group(function () {
+    Route::get('/', [HomeController::class, 'index']);
+});

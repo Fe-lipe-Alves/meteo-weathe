@@ -22,13 +22,13 @@
 
                 <!-- Icone -->
                 <div class="w-full flex justify-center pt-8">
-                    <img src="/images/icons/weather/42081_rain_partly_cloudy_large@2x.png" alt="Noite chuvosa" class="w-32">
+                    <img src="/images/icons/weather/42081_rain_partly_cloudy_large@2x.webp" alt="Noite chuvosa" class="w-32">
                 </div>
                 <!-- Fim Icone -->
 
                 <!-- Temperatura -->
                 <div class="w-full flex justify-center pt-8">
-                    <div class="bg-white py-1 px-8 rounded-full">
+                    <div class="bg-grayish-white-100 py-1 px-8 rounded-full">
                         <span class="text-4xl mr-3">22°C</span>
                         <span class="text-3xl ml-3 text-gray-700">13°C</span>
                     </div>
