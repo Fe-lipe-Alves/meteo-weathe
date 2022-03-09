@@ -50,7 +50,7 @@ class Tomorrow
         $cache = Consult::query()->where([
             'location' => $this->location,
             'timezone' => $this->timezone,
-            'startTime' => $this->startTime,
+            'startTime' => $this->startTime->setMinute(0)->setSecond(0)->setMicrosecond(0),
         ])->first();
 
         if (!is_null($cache)) {
@@ -130,9 +130,9 @@ class Tomorrow
      *
      * @return Collection
      */
-    private function fields(): Collection
+    private function fields(Timestep $timestep): Collection
     {
-        return new Collection([
+        $params = [
             new Field('precipitationIntensity', FieldComparison::Bigger),
             new Field('windDirection', FieldComparison::Frequency),
             new Field('windSpeed', FieldComparison::Bigger),
@@ -144,7 +144,14 @@ class Tomorrow
             new Field('temperatureMin', FieldComparison::Smaller),
             new Field('weatherCode', FieldComparison::Frequency),
             new Field('humidity', FieldComparison::Smaller),
-        ]);
+        ];
+
+        if ($timestep == Timestep::Day) {
+            $params[] = new Field('sunriseTime', FieldComparison::Frequency);
+            $params[] = new Field('sunsetTime', FieldComparison::Frequency);
+        }
+
+        return new Collection($params);
     }
 
     /**
@@ -226,10 +233,80 @@ class Tomorrow
                 if ($carbonHour->betweenIncluded($startDay, $endDay)) {
                     $day['hours'][] = $hour;
                 }
+
+                $day['values']['weatherCodeDescription'] = $this->weatherCodeDescription($day['values']['weatherCode']);
+                $day['values']['dayOfWeek'] = $this->nameyDayOfWeek($startDay);
+
+                $path = 'images/icons/weather/large/png/' . $day['values']['weatherCode'] . '0_large@2x.png';
+                $day['values']['weatherIcon'] = asset($path);
             }
+
+            $hour['values']['weatherCodeDescription'] = $this->weatherCodeDescription($hour['values']['weatherCode']);
         }
 
         return $days;
+    }
+
+    /**
+     * Retorna nome do dia da semana para a data informada
+     *
+     * @param Carbon $day
+     * @return string
+     */
+    public function nameyDayOfWeek(Carbon $day): string
+    {
+        $weekMap = [
+            0 => 'Domingo',
+            1 => 'Segunda-feira',
+            2 => 'Terça-feira',
+            3 => 'Quarta-feira',
+            4 => 'Quinta-feira',
+            5 => 'Sexta-feira',
+            6 => 'Sábado',
+        ];
+
+        return $weekMap[$day->dayOfWeek];
+    }
+
+    /**
+     * Identiica a descrição do clima segundo o ícone
+     *
+     * @param int $weatherCode
+     * @return string
+     */
+    public function weatherCodeDescription(int $weatherCode): string
+    {
+        $descriptions = [
+            0    => '',
+            1000 => 'Limpo',
+            1001 => 'Nublado',
+            1100 => 'Predominantemente Limpo',
+            1101 => 'Parcialmente Nublado',
+            1102 => 'Predominantemente nublado',
+            2000 => 'Névoa',
+            2100 => 'Nevoeiro Leve',
+            3000 => 'Vento Leve',
+            3001 => 'Vento',
+            3002 => 'Strong Wind',
+            4000 => 'Chuvisco',
+            4001 => 'Chuva',
+            4200 => 'Chuva Leve',
+            4201 => 'Chuva Pesada',
+            5000 => 'Neve',
+            5001 => 'Rajadas',
+            5100 => 'Pouca Neve',
+            5101 => 'Neve Pesada',
+            6000 => 'Garoa Congelante',
+            6001 => 'Chuva Congelante',
+            6200 => 'Chuva Leve e Congelante',
+            6201 => 'Chuva Pesada e Congelante',
+            7000 => 'Pelotas de Gelo',
+            7101 => 'Pelotas de Gelo Pesado',
+            7102 => 'Pelotas de Gelo Leves',
+            8000 => 'Trovoadas',
+        ];
+
+        return $descriptions[$weatherCode];
     }
 
     /**
@@ -240,7 +317,7 @@ class Tomorrow
      */
     private function url(Timestep $timestep): string
     {
-        $fields = $this->fields()->implode('name', ',');
+        $fields = $this->fields($timestep)->implode('name', ',');
 
         $params = [
             "apikey"    => $this->apiKey,
@@ -283,6 +360,54 @@ class Tomorrow
         ]);
     }
 
+    public function now()
+    {
+        foreach ($this->result->next_days as $day) {
+            if (!isset($day['hours'])) {
+                continue;
+            }
+
+            foreach ($day['hours'] as $hour) {
+                $startTime = Carbon::make($hour['startTime'])->setMinute(0)->setSecond(0);
+                $now = Carbon::now()->setMinute(0)->setSecond(0)->setMicrosecond(0);
+
+                if ($now->equalTo($startTime)) {
+                    $this->identifyIcon($hour, $day);
+
+                    return $hour;
+                }
+            }
+        }
+
+        return $this->today();
+    }
+
+    /**
+     * Identifica se o icone deve simbolozar o dia ou a noite conforme o horário atual e retorna o caminho do icone
+     *
+     * @param array $hour
+     * @param array $day
+     * @return void
+     */
+    public function identifyIcon(array &$hour, array $day)
+    {
+        $sunsetTime = Carbon::make($day['values']['sunsetTime'])->setTimezone($this->timezone);
+        $sunriseTime = Carbon::make($day['values']['sunriseTime'])->setTimezone($this->timezone);
+        $hourTime = Carbon::make($hour['startTime'])->setTimezone($this->timezone);
+
+        $night = $sunsetTime->diffInMinutes($hourTime, false) < 0  &&
+        $sunriseTime->diffInMinutes($hourTime, false) >= 0
+            ? '0' : '1';
+
+        $path = 'images/icons/weather/large/png/' . $hour['values']['weatherCode'] . $night . '_large@2x.png';
+
+        if (!file_exists(public_path($path))) {
+            $path = 'images/icons/weather/large/png/' . $hour['values']['weatherCode']  . '0_large@2x.png';
+        }
+
+        $hour['values']['weatherIcon'] = asset($path);
+    }
+
     /**
      * Retorna os dados de hoje, contando com dados de horas a hora
      *
@@ -296,10 +421,15 @@ class Tomorrow
     /**
      * Retorna os dados dos próximos dias, contando com dados de hora a horas para os primeiro 4 dias
      *
+     * @param int $max
      * @return array
      */
-    public function nextDays(): array
+    public function nextDays(int $max = 0): array
     {
-        return $this->result->next_days;
+        if ($max == 0) {
+            return $this->result->next_days;
+        }
+
+        return array_slice($this->result->next_days, 0, $max);
     }
 }
