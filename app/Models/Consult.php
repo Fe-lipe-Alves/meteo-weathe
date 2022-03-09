@@ -40,7 +40,7 @@ class Consult extends Model
     protected function startTime(): Attribute
     {
         return Attribute::set(
-            fn ($value) => $value->setMinute(0)->setSecond(0)
+            fn ($value) => $value->setMinute(0)->setSecond(0)->setMicrosecond(0)
         );
     }
 }
