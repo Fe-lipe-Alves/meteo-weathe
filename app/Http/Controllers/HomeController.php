@@ -22,17 +22,19 @@ class HomeController extends Controller
     {
         try {
             //        $ipClient = $request->ip();
-            $ipClient = '186.193.118.203';
+            $ipClient = '186.193.112.12';
             $consultIp = IpInfo::consultIp($ipClient);
+            $latLon = $consultIp['lat'] .','. $consultIp['lon'];
 
-            $tomorrow = new Tomorrow($consultIp['loc'], $consultIp['timezone']);
+            $tomorrow = new Tomorrow($latLon, $consultIp['timezone']);
 
+            $now = $tomorrow->now();
             $today = $tomorrow->today();
-            $today['location'] = $consultIp['city'];
-
-            $nextDays = $tomorrow->nextDays();
+            $now['location'] = $consultIp['city'];
+            $nextDays = $tomorrow->nextDays(7);
 
             return Inertia::render('Home', [
+                'dataNow'      => $now,
                 'dataToday'    => $today,
                 'dataNextDays' => $nextDays,
             ]);
