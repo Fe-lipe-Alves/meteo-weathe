@@ -10,7 +10,7 @@
 
 
         <div class="w-full lg:w-6/12 flex justify-center items-center">
-            <p class="text-center text-gray-100 text-xs">Meteo Weather - 2022 | Desenvolvido por Felipe Alves</p>
+            <p class="text-center text-gray-100 text-xs">Meteo Weather - 2022 | Desenvolvido por Felipe Alves | Powered by Tomorrow.io</p>
         </div>
     </footer>
 

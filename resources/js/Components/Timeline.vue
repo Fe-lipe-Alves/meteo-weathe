@@ -20,9 +20,14 @@
                             <img src="/images/icons/weather/42081_rain_partly_cloudy_large.webp" alt="Dia chuvoso" class="w-12">
                         </div>
 
-                        <div class="text-sm my-1">85%</div>
-
-                        <div class="text-sm my-1 mb-5">15 km/h</div>
+                        <div class="text-sm my-1 flex">
+                            <img src="/images/icons/weather/rain.svg" alt="Probabilidade de chuva" class="w-4 mr-1">
+                            85%
+                        </div>
+                        <div class="text-sm my-1 mb-5 flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5.81 10.124" class="temperature-min-max__icon--K4X9"><path d="M3.401 9h-1V0h1z"></path><path d="M2.901 10.124l-2.9-3.873.8-.6 2.1 2.806L5.013 5.65l.8.6z"></path></svg>
+                            15 km/h
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,14 +47,6 @@ export default {
             default: [1,2,3,4,5,6,7,8,9,10,11]
         }
     },
-    // mounted() {
-    //     const details = document.getElementsByClassName('details'),
-    //         dashed = document.getElementsByClassName('dashed')
-    //
-    //     for (let i=0; i < dashed.length; i++) {
-    //         dashed[i].querySelector('rect').setAttribute("height", details[0].offsetHeight+"px");
-    //     }
-    // }
 }
 </script>
 
