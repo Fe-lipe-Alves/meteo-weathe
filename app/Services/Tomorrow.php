@@ -167,8 +167,6 @@ class Tomorrow
 
         if ($startDay->diffInHours($now, true) < 6) {
             $now->startOfDay();
-        } else {
-            $now->subHours(6);
         }
 
         $this->startTime = $now->copy();
@@ -224,13 +222,19 @@ class Tomorrow
     private function generateNextDays(array $days, array $hours): array
     {
         foreach ($hours as $hour) {
-            $carbonHour = Carbon::make($hour['startTime']);
+            $carbonHour = Carbon::make($hour['startTime'])->setTimezone($this->timezone);
+            $hour['startTime'] = $carbonHour->toISOString();
 
             foreach ($days as &$day) {
-                $startDay = Carbon::make($day['startTime'])->startOfDay();
+                $startDay = Carbon::make($day['startTime'])->setTimezone($this->timezone)->startOfDay();
                 $endDay = $startDay->copy()->endOfDay();
 
                 if ($carbonHour->betweenIncluded($startDay, $endDay)) {
+                    $hour['values']['weatherCodeDescription'] =
+                        $this->weatherCodeDescription($hour['values']['weatherCode']);
+
+                    $this->identifyIcon($hour, $day);
+
                     $day['hours'][] = $hour;
                 }
 
@@ -240,8 +244,6 @@ class Tomorrow
                 $path = 'images/icons/weather/large/png/' . $day['values']['weatherCode'] . '0_large@2x.png';
                 $day['values']['weatherIcon'] = asset($path);
             }
-
-            $hour['values']['weatherCodeDescription'] = $this->weatherCodeDescription($hour['values']['weatherCode']);
         }
 
         return $days;
@@ -431,5 +433,33 @@ class Tomorrow
         }
 
         return array_slice($this->result->next_days, 0, $max);
+    }
+
+    /**
+     * Retorna os dados das próximas horas, limitando ao valor recebido no parâmetro
+     *
+     * @param int $max
+     * @return array
+     */
+    public function nextHours(int $max = 0): array
+    {
+        $hours = [];
+        $count = 0;
+
+        foreach ($this->result->next_days as $day) {
+            if (isset($day['hours'])) {
+
+                foreach ($day['hours'] as $hour) {
+                    if ($count <= $max) {
+                        $this->identifyIcon($hour, $day);
+                        $hours[] = $hour;
+                        $count++;
+                    }
+                }
+
+            }
+        }
+
+        return $hours;
     }
 }
