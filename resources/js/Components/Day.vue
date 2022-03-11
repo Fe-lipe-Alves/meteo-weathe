@@ -3,7 +3,9 @@
     <div class="w-4/12 lg:w-44 p-1 lg:px-0">
         <div class="bg-grayish-white-200 pt-5 pb-3 px-5 rounded-md h-full">
 
-            <p class="text-center text-sm" :title="day.values.dayOfWeek">{{ day.values.dayOfWeek.substring(0, 3).toUpperCase() }}</p>
+            <p class="text-center text-sm" :title="day.values.dayOfWeek">
+                {{ day.values.dayOfWeek.substring(0, 3).toUpperCase() }}
+            </p>
 
             <div class="flex justify-center pt-3">
                 <img
@@ -14,11 +16,17 @@
             </div>
 
             <div class="flex justify-center py-4">
-                <span class="text-2xl mr-2">{{ Math.trunc(day.values.temperatureMax) }}°C</span>
-                <span class="text-lg ml-2 text-gray-700">{{ Math.trunc(day.values.temperatureMin) }}°C</span>
+                <span class="text-2xl mr-2">
+                    {{ Math.trunc(day.values.temperatureMax) }}°C
+                </span>
+                <span class="text-lg ml-2 text-gray-700">
+                    {{ Math.trunc(day.values.temperatureMin) }}°C
+                </span>
             </div>
 
-            <p class="text-xs">{{ day.values.weatherCodeDescription }}</p>
+            <p class="text-xs">
+                {{ day.values.weatherCodeDescription }}
+            </p>
         </div>
     </div>
 
