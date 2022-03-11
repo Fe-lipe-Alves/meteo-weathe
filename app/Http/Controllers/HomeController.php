@@ -29,14 +29,19 @@ class HomeController extends Controller
             $tomorrow = new Tomorrow($latLon, $consultIp['timezone']);
 
             $now = $tomorrow->now();
+
             $today = $tomorrow->today();
-            $now['location'] = $consultIp['city'];
+            $today['city'] = $consultIp['city'];
+
             $nextDays = $tomorrow->nextDays(7);
 
+            $nextHours = $tomorrow->nextHours(24);
+
             return Inertia::render('Home', [
-                'dataNow'      => $now,
-                'dataToday'    => $today,
-                'dataNextDays' => $nextDays,
+                'dataNow'       => $now,
+                'dataToday'     => $today,
+                'dataNextDays'  => $nextDays,
+                'dataNextHours' => $nextHours
             ]);
         } catch (Exception) {
             return Inertia::render('Error');
