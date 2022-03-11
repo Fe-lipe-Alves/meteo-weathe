@@ -19293,12 +19293,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var moment_moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment/moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment_moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment_moment__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Timeline",
   props: {
-    hours: {
-      type: Array,
-      "default": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    dataNextHours: Array
+  },
+  methods: {
+    getHourFormated: function getHourFormated(datetime) {
+      return moment_moment__WEBPACK_IMPORTED_MODULE_0___default()(datetime).format('HH:mm');
     }
   }
 });
@@ -19368,7 +19373,8 @@ __webpack_require__.r(__webpack_exports__);
     name: String,
     dataNow: Object,
     dataToday: Object,
-    dataNextDays: Object
+    dataNextDays: Object,
+    dataNextHours: Object
   },
   beforeMount: function beforeMount() {
     if (!("geolocation" in navigator)) {
@@ -19438,9 +19444,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "w-12"
   }, null, 8
   /* PROPS */
-  , _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMax)) + "°C", 1
+  , _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMax)) + "°C ", 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMin)) + "°C", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMin)) + "°C ", 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.day.values.weatherCodeDescription), 1
   /* TEXT */
@@ -19503,29 +19509,100 @@ var _hoisted_2 = {
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
     "class": "text-2xl"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Hoje "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" A cada hora "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "text-lg"
-  }, " - A cada hora")], -1
+  })], -1
   /* HOISTED */
   );
 });
 
 var _hoisted_4 = {
+  id: "scroll-hours",
   "class": "w-full overflow-auto whitespace-nowrap px-6"
 };
+var _hoisted_5 = {
+  "class": "inline-flex items-center flex-col"
+};
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"inline-flex items-center flex-col\" data-v-2b66b90c><div class=\"dashed flex flex-1 justify-center\" data-v-2b66b90c><svg data-v-2b66b90c><rect x=\"0\" y=\"0\" height=\"100%\" data-v-2b66b90c></rect></svg></div><div class=\"text-xs mt-3\" data-v-2b66b90c>22:00</div></div><div class=\"details flex flex-col justify-center text-center py-4 px-4\" data-v-2b66b90c><div class=\"flex flex-col justify-center my-2\" data-v-2b66b90c><img src=\"/images/icons/weather/42081_rain_partly_cloudy_large.webp\" alt=\"Dia chuvoso\" class=\"w-12\" data-v-2b66b90c></div><div class=\"text-sm my-1 flex\" data-v-2b66b90c><img src=\"/images/icons/weather/rain.svg\" alt=\"Probabilidade de chuva\" class=\"w-4 mr-1\" data-v-2b66b90c> 85% </div><div class=\"text-sm my-1 mb-5 flex\" data-v-2b66b90c><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 5.81 10.124\" class=\"temperature-min-max__icon--K4X9\" data-v-2b66b90c><path d=\"M3.401 9h-1V0h1z\" data-v-2b66b90c></path><path d=\"M2.901 10.124l-2.9-3.873.8-.6 2.1 2.806L5.013 5.65l.8.6z\" data-v-2b66b90c></path></svg> 15 km/h </div></div>", 2);
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "dashed flex flex-1 justify-center"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("rect", {
+    x: "0",
+    y: "0",
+    height: "100%"
+  })])], -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_7 = [_hoisted_5];
+var _hoisted_7 = {
+  "class": "text-sm mt-3"
+};
+var _hoisted_8 = {
+  "class": "details flex flex-col justify-center text-center py-4 px-4"
+};
+var _hoisted_9 = {
+  "class": "flex flex-col justify-center my-2"
+};
+var _hoisted_10 = ["src", "title"];
+var _hoisted_11 = {
+  "class": "text-sm my-1 flex",
+  title: "Probabilidade de chuva"
+};
+
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: "/images/icons/weather/rain.svg",
+    alt: "Probabilidade de chuva",
+    "class": "w-4 mr-1"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_13 = {
+  "class": "text-sm my-1 mb-5 flex",
+  title: "Velocidade do vento"
+};
+
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 5.81 10.124",
+    "class": "temperature-min-max__icon--K4X9"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+    d: "M3.401 9h-1V0h1z"
+  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+    d: "M2.901 10.124l-2.9-3.873.8-.6 2.1 2.806L5.013 5.65l.8.6z"
+  })], -1
+  /* HOISTED */
+  );
+});
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.hours, function (hour) {
+  var _directive_dragscroll = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("dragscroll");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.dataNextHours, function (hour) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "inline-flex py-6",
       key: hour.index
-    }, _hoisted_7);
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getHourFormated(hour.startTime)), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: hour.values.weatherIcon,
+      title: hour.values.weatherCodeDescription,
+      "class": "w-12"
+    }, null, 8
+    /* PROPS */
+    , _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hour.values.precipitationProbability) + " % ", 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc(hour.values.windSpeed)) + " km/h ", 1
+    /* TEXT */
+    )])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])]);
+  ))])), [[_directive_dragscroll]])])]);
 }
 
 /***/ }),
@@ -19607,7 +19684,7 @@ var _hoisted_19 = {
   "class": "w-4/12 text-shadow text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Topo"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dataToday.location), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Topo"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dataToday.city), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dataToday.date), 1
   /* TEXT */
@@ -19617,13 +19694,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "w-32"
   }, null, 8
   /* PROPS */
-  , _hoisted_11)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fim Icone "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temperatura "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataNow.values.temperatureMax)) + "°C", 1
+  , _hoisted_11)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fim Icone "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temperatura "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataNow.values.temperatureMax)) + "°C ", 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fim Temperatura "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Detalhes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_17, "Sensação térmica " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataToday.values.temperatureApparent)) + "°C", 1
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fim Temperatura "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Detalhes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_17, " Sensação térmica " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataToday.values.temperatureApparent)) + "°C ", 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_18, "Vento " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataToday.values.windSpeed)) + " km/h", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_18, " Vento " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataToday.values.windSpeed)) + " km/h ", 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_19, "Umidade " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataToday.values.humidity)) + "%", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_19, " Umidade " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.dataToday.values.humidity)) + "% ", 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fim Detalhes ")])])]);
 }
@@ -19673,7 +19750,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["day"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Próximos Dias "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Hora a Hora "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Timeline), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Rodape "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)]);
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Próximos Dias "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Hora a Hora "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Timeline, {
+    dataNextHours: $props.dataNextHours
+  }, null, 8
+  /* PROPS */
+  , ["dataNextHours"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Rodape "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)]);
 }
 
 /***/ }),
@@ -19689,6 +19770,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/progress */ "./node_modules/@inertiajs/progress/dist/index.js");
+/* harmony import */ var vue_dragscroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-dragscroll */ "./node_modules/vue-dragscroll/src/main.js");
+
 
 
 
@@ -19702,11 +19785,14 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init();
         App = _ref.App,
         props = _ref.props,
         plugin = _ref.plugin;
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
+    var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(App, props);
       }
-    }).use(plugin).mount(el);
+    });
+    app.directive('dragscroll', vue_dragscroll__WEBPACK_IMPORTED_MODULE_3__.dragscrollNext);
+    app.use(plugin);
+    app.mount(el);
   }
 });
 
@@ -46936,6 +47022,590 @@ module.exports = function (list, options) {
     lastIdentifiers = newLastIdentifiers;
   };
 };
+
+/***/ }),
+
+/***/ "./node_modules/vue-dragscroll/src/directive-next.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/vue-dragscroll/src/directive-next.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./node_modules/vue-dragscroll/src/utils.js");
+
+
+const POINTER_START_EVENTS = ['mousedown', 'touchstart']
+const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
+const POINTER_END_EVENTS = ['mouseup', 'touchend']
+
+const init = function (el, binding, vnode) {
+  // Default parameters
+  let target = el // the element to apply the dragscroll on
+  let active = true // enable/disable dragscroll
+  let container = window
+
+  // config type: boolean
+  // Example: v-dragscroll="true" or v-dragscroll="false"
+  if (typeof binding.value === 'boolean') {
+    active = binding.value
+  } else if (typeof binding.value === 'object') {
+    // config type: object
+    // Example: v-dragscroll="{ active: true , target: "child" }"
+
+    // parameter: target
+    if (typeof binding.value.target === 'string') {
+      target = el.querySelector(binding.value.target)
+      if (!target) {
+        console.error('There is no element with the current target value.')
+      }
+    } else if (typeof binding.value.target !== 'undefined') {
+      console.error('The parameter "target" should be either \'undefined\' or \'string\'.')
+    }
+    // parameter: container
+    if (typeof binding.value.container === 'string') {
+      container = document.querySelector(binding.value.container)
+      if (!container) {
+        console.error('There is no element with the current container value.')
+      }
+    } else if (typeof binding.value.container !== 'undefined') {
+      console.error('The parameter "container" should be be either \'undefined\' or \'string\'.')
+    }
+
+    // parameter: active
+    if (typeof binding.value.active === 'boolean') {
+      active = binding.value.active
+    } else if (typeof binding.value.active !== 'undefined') {
+      console.error('The parameter "active" value should be either \'undefined\', \'true\' or \'false\'.')
+    }
+  } else if (typeof binding.value !== 'undefined') {
+    // Throw an error if invalid parameters
+    console.error('The passed value should be either \'undefined\', \'true\' or \'false\' or \'object\'.')
+  }
+
+  const scrollBy = function (x, y) {
+    if (container === window) {
+      window.scrollBy(x, y)
+    } else {
+      container.scrollLeft += x
+      container.scrollTop += y
+    }
+  }
+
+  const reset = function () {
+    let lastClientX, lastClientY, pushed
+    let isDragging = false
+    // let isClick = false // workaround to handle click event from touch
+
+    target.md = function (e) {
+      // e.preventDefault()
+      const isMouseEvent = e instanceof window.MouseEvent
+      // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
+      const pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
+      const pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
+      const clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset)
+
+      const hasNoChildDrag = binding.arg === 'nochilddrag'
+      const ignoreLeft = binding.modifiers.noleft
+      const ignoreRight = binding.modifiers.noright
+      const ignoreMiddle = binding.modifiers.nomiddle
+      const ignoreBack = binding.modifiers.noback
+      const ignoreForward = binding.modifiers.noforward
+      const hasFirstChildDrag = binding.arg === 'firstchilddrag'
+      const isEl = clickedElement === target
+      const isFirstChild = clickedElement === target.firstChild
+      const isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
+
+      if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
+        return
+      }
+
+      if (e.which === 1 && ignoreLeft) {
+        return
+      } else if (e.which === 2 && ignoreMiddle) {
+        return
+      } else if (e.which === 3 && ignoreRight) {
+        return
+      } else if (e.which === 4 && ignoreBack) {
+        return
+      } else if (e.which === 5 && ignoreForward) {
+        return
+      }
+
+      pushed = 1
+      // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
+      lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX
+      lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY
+      // if (e.type === 'touchstart') {
+      //   isClick = true
+      // }
+    }
+
+    target.mu = function (e) {
+      pushed = 0
+      if (isDragging) {
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent2(vnode, 'dragscrollend')
+      }
+      isDragging = false
+      // if (e.type === 'touchend' && isClick === true) {
+      //   // this workaround enable click will using touch
+      //   e.target.click()
+      //   isClick = false
+      // } else {
+      //   e.target.focus()
+      // }
+    }
+
+    target.mm = function (e) {
+      const isMouseEvent = e instanceof window.MouseEvent
+      let newScrollX, newScrollY
+      const eventDetail = {}
+      if (pushed) {
+        e.preventDefault()
+        // pushed
+        // Emit start event
+        if (!isDragging) {
+          _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent2(vnode, 'dragscrollstart')
+        }
+        isDragging = true
+
+        // when we reach the end or the begining of X or Y
+        const isEndX = ((target.scrollLeft + target.clientWidth) >= target.scrollWidth) || target.scrollLeft === 0
+        const isEndY = ((target.scrollTop + target.clientHeight) >= target.scrollHeight) || target.scrollTop === 0
+
+        // get new scroll dimentions
+        newScrollX = (-lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX))
+        newScrollY = (-lastClientY + (lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY))
+
+        if (binding.modifiers.pass) {
+          // compute and scroll
+          target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+          target.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          if (target === document.body) {
+            target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+            target.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          }
+
+          // if one side reach the end scroll container
+          if (isEndX || binding.modifiers.y) {
+            scrollBy(-newScrollX, 0)
+          }
+          if (isEndY || binding.modifiers.x) {
+            scrollBy(0, -newScrollY)
+          }
+        } else {
+          // disable one scroll direction in case x or y is specified
+          if (binding.modifiers.x) newScrollY = -0
+          if (binding.modifiers.y) newScrollX = -0
+
+          // compute and scroll
+          target.scrollLeft -= newScrollX
+          target.scrollTop -= newScrollY
+          if (target === document.body) {
+            target.scrollLeft -= newScrollX
+            target.scrollTop -= newScrollY
+          }
+        }
+
+        // Emit events
+        eventDetail.deltaX = -newScrollX
+        eventDetail.deltaY = -newScrollY
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent2(vnode, 'dragscrollmove', eventDetail)
+      }
+    }
+
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(target, POINTER_START_EVENTS, target.md)
+
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_END_EVENTS, target.mu)
+
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
+  }
+  // if value is undefined or true we will init
+  if (active) {
+    if (document.readyState === 'complete') {
+      reset()
+    } else {
+      window.addEventListener('load', reset)
+    }
+  } else {
+    // if value is false means we disable
+    // window.removeEventListener('load', reset)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
+  }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mounted: function (el, binding, vnode) {
+    init(el, binding, vnode)
+  },
+  updated: function (el, binding, vnode, oldVnode) {
+    // update the component only if the parameters change
+    if (JSON.stringify(binding.value) !== JSON.stringify(binding.oldValue)) {
+      init(el, binding, vnode)
+    }
+  },
+  unmounted: function (el, binding, vnode) {
+    const target = el
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-dragscroll/src/directive.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vue-dragscroll/src/directive.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./node_modules/vue-dragscroll/src/utils.js");
+
+
+const POINTER_START_EVENTS = ['mousedown', 'touchstart']
+const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
+const POINTER_END_EVENTS = ['mouseup', 'touchend']
+
+const init = function (el, binding, vnode) {
+  // Default parameters
+  let target = el // the element to apply the dragscroll on
+  let active = true // enable/disable dragscroll
+  let container = window
+
+  // config type: boolean
+  // Example: v-dragscroll="true" or v-dragscroll="false"
+  if (typeof binding.value === 'boolean') {
+    active = binding.value
+  } else if (typeof binding.value === 'object') {
+    // config type: object
+    // Example: v-dragscroll="{ active: true , target: "child" }"
+
+    // parameter: target
+    if (typeof binding.value.target === 'string') {
+      target = el.querySelector(binding.value.target)
+      if (!target) {
+        console.error('There is no element with the current target value.')
+      }
+    } else if (typeof binding.value.target !== 'undefined') {
+      console.error('The parameter "target" should be either \'undefined\' or \'string\'.')
+    }
+    // parameter: container
+    if (typeof binding.value.container === 'string') {
+      container = document.querySelector(binding.value.container)
+      if (!container) {
+        console.error('There is no element with the current container value.')
+      }
+    } else if (typeof binding.value.container !== 'undefined') {
+      console.error('The parameter "container" should be be either \'undefined\' or \'string\'.')
+    }
+
+    // parameter: active
+    if (typeof binding.value.active === 'boolean') {
+      active = binding.value.active
+    } else if (typeof binding.value.active !== 'undefined') {
+      console.error('The parameter "active" value should be either \'undefined\', \'true\' or \'false\'.')
+    }
+  } else if (typeof binding.value !== 'undefined') {
+    // Throw an error if invalid parameters
+    console.error('The passed value should be either \'undefined\', \'true\' or \'false\' or \'object\'.')
+  }
+
+  const scrollBy = function (x, y) {
+    if (container === window) {
+      window.scrollBy(x, y)
+    } else {
+      container.scrollLeft += x
+      container.scrollTop += y
+    }
+  }
+
+  const reset = function () {
+    let lastClientX, lastClientY, pushed
+    let isDragging = false
+    // let isClick = false // workaround to handle click event from touch
+
+    target.md = function (e) {
+      // e.preventDefault()
+      const isMouseEvent = e instanceof window.MouseEvent
+      // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
+      const pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
+      const pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
+      const clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset)
+
+      const hasNoChildDrag = binding.arg === 'nochilddrag'
+      const ignoreLeft = binding.modifiers.noleft
+      const ignoreRight = binding.modifiers.noright
+      const ignoreMiddle = binding.modifiers.nomiddle
+      const ignoreBack = binding.modifiers.noback
+      const ignoreForward = binding.modifiers.noforward
+      const hasFirstChildDrag = binding.arg === 'firstchilddrag'
+      const isEl = clickedElement === target
+      const isFirstChild = clickedElement === target.firstChild
+      const isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
+
+      if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
+        return
+      }
+
+      if (e.which === 1 && ignoreLeft) {
+        return
+      } else if (e.which === 2 && ignoreMiddle) {
+        return
+      } else if (e.which === 3 && ignoreRight) {
+        return
+      } else if (e.which === 4 && ignoreBack) {
+        return
+      } else if (e.which === 5 && ignoreForward) {
+        return
+      }
+
+      pushed = 1
+      // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
+      lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX
+      lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY
+      // if (e.type === 'touchstart') {
+      //   isClick = true
+      // }
+    }
+
+    target.mu = function (e) {
+      pushed = 0
+      if (isDragging) {
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent(vnode, 'dragscrollend')
+      }
+      isDragging = false
+      // if (e.type === 'touchend' && isClick === true) {
+      //   // this workaround enable click will using touch
+      //   e.target.click()
+      //   isClick = false
+      // } else {
+      //   e.target.focus()
+      // }
+    }
+
+    target.mm = function (e) {
+      const isMouseEvent = e instanceof window.MouseEvent
+      let newScrollX, newScrollY
+      const eventDetail = {}
+      if (pushed) {
+        e.preventDefault()
+        // pushed
+        // Emit start event
+        if (!isDragging) {
+          _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent(vnode, 'dragscrollstart')
+        }
+        isDragging = true
+
+        // when we reach the end or the begining of X or Y
+        const isEndX = ((target.scrollLeft + target.clientWidth) >= target.scrollWidth) || target.scrollLeft === 0
+        const isEndY = ((target.scrollTop + target.clientHeight) >= target.scrollHeight) || target.scrollTop === 0
+
+        // get new scroll dimentions
+        newScrollX = (-lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX))
+        newScrollY = (-lastClientY + (lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY))
+
+        if (binding.modifiers.pass) {
+          // compute and scroll
+          target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+          target.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          if (target === document.body) {
+            target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+            target.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          }
+
+          // if one side reach the end scroll container
+          if (isEndX || binding.modifiers.y) {
+            scrollBy(-newScrollX, 0)
+          }
+          if (isEndY || binding.modifiers.x) {
+            scrollBy(0, -newScrollY)
+          }
+        } else {
+          // disable one scroll direction in case x or y is specified
+          if (binding.modifiers.x) newScrollY = -0
+          if (binding.modifiers.y) newScrollX = -0
+
+          // compute and scroll
+          target.scrollLeft -= newScrollX
+          target.scrollTop -= newScrollY
+          if (target === document.body) {
+            target.scrollLeft -= newScrollX
+            target.scrollTop -= newScrollY
+          }
+        }
+
+        // Emit events
+        eventDetail.deltaX = -newScrollX
+        eventDetail.deltaY = -newScrollY
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent(vnode, 'dragscrollmove', eventDetail)
+      }
+    }
+
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(target, POINTER_START_EVENTS, target.md)
+
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_END_EVENTS, target.mu)
+
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
+  }
+  // if value is undefined or true we will init
+  if (active) {
+    if (document.readyState === 'complete') {
+      reset()
+    } else {
+      window.addEventListener('load', reset)
+    }
+  } else {
+    // if value is false means we disable
+    // window.removeEventListener('load', reset)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
+  }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  inserted: function (el, binding, vnode) {
+    init(el, binding, vnode)
+  },
+  update: function (el, binding, vnode, oldVnode) {
+    // update the component only if the parameters change
+    if (JSON.stringify(binding.value) !== JSON.stringify(binding.oldValue)) {
+      init(el, binding, vnode)
+    }
+  },
+  unbind: function (el, binding, vnode) {
+    const target = el
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu)
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-dragscroll/src/main.js":
+/*!*************************************************!*\
+  !*** ./node_modules/vue-dragscroll/src/main.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dragscroll": () => (/* reexport safe */ _directive__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "dragscrollNext": () => (/* reexport safe */ _directive_next__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./directive */ "./node_modules/vue-dragscroll/src/directive.js");
+/* harmony import */ var _directive_next__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./directive-next */ "./node_modules/vue-dragscroll/src/directive-next.js");
+
+
+
+// Vue 2
+const VueDragscroll = {
+  install (Vue, options) {
+    const major = Number(Vue.version.split('.')[0])
+    const minor = Number(Vue.version.split('.')[1])
+
+    if (major < 2 && minor < 1) {
+      throw new Error(`v-dragscroll supports vue version 2.1 and above. You are using Vue@${Vue.version}. Please upgrade to the latest version of Vue.`)
+    }
+
+    Vue.directive('dragscroll', _directive__WEBPACK_IMPORTED_MODULE_0__["default"])
+  }
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  if (window.Vue.version.split('.')[0] <= 2) {
+    window.VueDragscroll = VueDragscroll
+    window.Vue.use(VueDragscroll)
+  } else {
+    window.VueDragscroll = _directive_next__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+}
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VueDragscroll);
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-dragscroll/src/utils.js":
+/*!**************************************************!*\
+  !*** ./node_modules/vue-dragscroll/src/utils.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  addEventListeners (el, events, handler) {
+    for (let i = 0, len = events.length; i < len; i++) {
+      el.addEventListener(events[i], handler, { passive: false })
+    }
+  },
+
+  removeEventListeners (el, events, handler) {
+    for (let i = 0, len = events.length; i < len; i++) {
+      el.removeEventListener(events[i], handler, { passive: false })
+    }
+  },
+
+  emitEvent: function (vnode, eventName, eventDetail) {
+    // Vue 2
+    // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
+    if (vnode.componentInstance) {
+      vnode.componentInstance.$emit(eventName, eventDetail)
+    } else {
+      let event
+      if (typeof (window.CustomEvent) === 'function') {
+        event = new window.CustomEvent(eventName, { detail: eventDetail })
+      } else {
+        // Deprecated fallback for IE
+        event = document.createEvent('CustomEvent')
+        event.initCustomEvent(eventName, true, true, eventDetail)
+      }
+      vnode.elm.dispatchEvent(event)
+    }
+  },
+
+  emitEvent2: function (vnode, eventName, eventDetail) {
+    // Vue 3
+    // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
+    if (vnode.componentInstance) {
+      vnode.componentInstance.$emit(eventName, eventDetail)
+    } else {
+      let event
+      if (typeof (window.CustomEvent) === 'function') {
+        event = new window.CustomEvent(eventName, { detail: eventDetail })
+      } else {
+        // Deprecated fallback for IE
+        event = document.createEvent('CustomEvent')
+        event.initCustomEvent(eventName, true, true, eventDetail)
+      }
+      vnode.el.dispatchEvent(event)
+    }
+  }
+});
+
 
 /***/ }),
 
