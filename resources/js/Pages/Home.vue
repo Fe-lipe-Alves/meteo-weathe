@@ -12,7 +12,7 @@
         <!-- Próximos Dias -->
 
         <!-- Hora a Hora -->
-        <Timeline/>
+        <Timeline :dataNextHours="dataNextHours"/>
 
         <!-- Rodape -->
         <Footer/>
@@ -34,6 +34,7 @@ export default {
         dataNow: Object,
         dataToday: Object,
         dataNextDays: Object,
+        dataNextHours: Object,
     },
     beforeMount() {
         if(!("geolocation" in navigator)) {

@@ -3,30 +3,39 @@
     <section class="w-11/12 mx-auto flex justify-between pt-14">
 
         <div class="bg-grayish-white-100 w-full pt-5 pb-3 px-5 rounded-md">
-            <h4 class="text-2xl">Hoje <span class="text-lg"> - A cada hora</span></h4>
+            <h4 class="text-2xl">
+                A cada hora
+                <span class="text-lg"></span>
+            </h4>
 
-            <div class="w-full overflow-auto whitespace-nowrap px-6">
-                <div class="inline-flex py-6" v-for="hour in hours" :key="hour.index">
+            <div id="scroll-hours" v-dragscroll class="w-full overflow-auto whitespace-nowrap px-6">
+                <div class="inline-flex py-6" v-for="hour in dataNextHours" :key="hour.index">
                     <div class="inline-flex items-center flex-col">
                         <div class="dashed flex flex-1 justify-center">
                             <svg>
                                 <rect x="0" y="0" height="100%"></rect>
                             </svg>
                         </div>
-                        <div class="text-xs mt-3">22:00</div>
+                        <div class="text-sm mt-3">
+                            {{ getHourFormated(hour.startTime) }}
+                        </div>
                     </div>
                     <div class="details flex flex-col justify-center text-center py-4 px-4">
                         <div class="flex flex-col justify-center my-2">
-                            <img src="/images/icons/weather/42081_rain_partly_cloudy_large.webp" alt="Dia chuvoso" class="w-12">
+                            <img
+                                :src="hour.values.weatherIcon"
+                                :title="hour.values.weatherCodeDescription"
+                                class="w-12"
+                            >
                         </div>
 
-                        <div class="text-sm my-1 flex">
+                        <div class="text-sm my-1 flex" title="Probabilidade de chuva">
                             <img src="/images/icons/weather/rain.svg" alt="Probabilidade de chuva" class="w-4 mr-1">
-                            85%
+                            {{ hour.values.precipitationProbability }} %
                         </div>
-                        <div class="text-sm my-1 mb-5 flex">
+                        <div class="text-sm my-1 mb-5 flex" title="Velocidade do vento">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5.81 10.124" class="temperature-min-max__icon--K4X9"><path d="M3.401 9h-1V0h1z"></path><path d="M2.901 10.124l-2.9-3.873.8-.6 2.1 2.806L5.013 5.65l.8.6z"></path></svg>
-                            15 km/h
+                            {{ Math.trunc(hour.values.windSpeed) }} km/h
                         </div>
                     </div>
                 </div>
@@ -39,14 +48,18 @@
 </template>
 
 <script>
+import moment from "moment/moment";
+
 export default {
     name: "Timeline",
     props: {
-        hours: {
-            type: Array,
-            default: [1,2,3,4,5,6,7,8,9,10,11]
-        }
+        dataNextHours: Array,
     },
+    methods: {
+        getHourFormated(datetime) {
+            return moment(datetime).format('HH:mm')
+        }
+    }
 }
 </script>
 
