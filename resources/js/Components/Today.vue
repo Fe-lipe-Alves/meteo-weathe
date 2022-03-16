@@ -113,7 +113,6 @@ export default {
             type: String,
             default: '0',
         },
-        links: Object,
     },
     mounted() {
         this.dataToday.date = moment(this.dataToday.startTime).format('DD/MM/YYYY')

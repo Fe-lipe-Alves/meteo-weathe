@@ -3,7 +3,7 @@
     <div id="global" class="h-full lg:pt-16 pt-8 overflow-auto" :style="'--image-background: url(' + imageBackground + ')'">
 
         <!-- Topo -->
-        <Today :data-now="dataNow" :data-today="dataToday" :links="links"/>
+        <Today :data-now="dataNow" :data-today="dataToday"/>
 
         <!-- Próximos Dias -->
         <section class="w-11/12 mx-auto flex justify-between pt-14 flex-wrap">
@@ -35,7 +35,6 @@ export default {
         dataToday: Object,
         dataNextDays: Object,
         dataNextHours: Object,
-        links: Object,
         imageBackground: String
     },
     beforeMount() {
