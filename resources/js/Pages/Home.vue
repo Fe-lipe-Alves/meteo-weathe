@@ -1,9 +1,9 @@
 <template>
 
-    <div id="global" class="h-full lg:pt-16 pt-8 overflow-auto">
+    <div id="global" class="h-full lg:pt-16 pt-8 overflow-auto" :style="'--image-background: url(' + imageBackground + ')'">
 
         <!-- Topo -->
-        <Today :data-now="dataNow" :data-today="dataToday"/>
+        <Today :data-now="dataNow" :data-today="dataToday" :links="links"/>
 
         <!-- Próximos Dias -->
         <section class="w-11/12 mx-auto flex justify-between pt-14 flex-wrap">
@@ -35,6 +35,8 @@ export default {
         dataToday: Object,
         dataNextDays: Object,
         dataNextHours: Object,
+        links: Object,
+        imageBackground: String
     },
     beforeMount() {
         if(!("geolocation" in navigator)) {
@@ -57,9 +59,13 @@ export default {
 </script>
 
 <style>
-    body {
+    root {
+        --image-background: '';
+    }
+
+    #global {
         background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-                          url('/images/backgrounds/background-005.webp');
+                          var(--image-background);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
