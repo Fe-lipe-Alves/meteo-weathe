@@ -1,6 +1,6 @@
 <template>
 
-    <div class="w-4/12 lg:w-44 p-1 lg:px-0">
+    <div class="w-4/12 lg:w-44 p-1 lg:px-0 last:hidden">
         <div class="bg-grayish-white-200 pt-5 pb-3 px-5 rounded-md h-full">
 
             <p class="text-center text-sm" :title="day.values.dayOfWeek">
@@ -16,10 +16,10 @@
             </div>
 
             <div class="flex justify-center py-4">
-                <span class="text-2xl mr-2">
+                <span class="text-xl lg:text-2xl mr-2">
                     {{ Math.trunc(day.values.temperatureMax) }}°C
                 </span>
-                <span class="text-lg ml-2 text-gray-700">
+                <span class="text-md lg:text-lg ml-2 text-gray-700">
                     {{ Math.trunc(day.values.temperatureMin) }}°C
                 </span>
             </div>
