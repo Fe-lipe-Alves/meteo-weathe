@@ -4,21 +4,21 @@ namespace App\Services;
 
 use App\Models\Consult;
 use App\Models\ErrorLog;
-use App\Support\Enums\FieldComparison;
+use App\Support\Enums\DayOfWeek;
 use App\Support\Enums\Timestep;
-use App\Support\Tomorrow\Field;
+use App\Support\Enums\Weather;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class Tomorrow
 {
-    private string $baseUrl = 'https://api.tomorrow.io/v4/timelines';
-    private string $apiKey = 'woUIhYHlbBiFaLX311Rv8NU0QmXC0MsP';
+    private const BASE_URL = 'https://api.tomorrow.io/v4/timelines';
+    private const URL_SEARCH = 'https://weather-services.tomorrow.io/backend/v1/cities';
+    private const API_KEY = 'woUIhYHlbBiFaLX311Rv8NU0QmXC0MsP';
     private Carbon $startTime;
     private Carbon $endTime;
     private Consult|Model $result;
@@ -35,6 +35,17 @@ class Tomorrow
         if (!$cache) {
             $this->consult();
         }
+    }
+
+    /**
+     * Consulta na API de localiazador de cidades conforme o nome recebido como parâmetro
+     *
+     * @param string $search
+     * @return array|mixed
+     */
+    public static function consultCities(string $search): mixed
+    {
+        return Http::get(self::URL_SEARCH . '?name=' . $search)->json();
     }
 
     /**
@@ -69,7 +80,7 @@ class Tomorrow
     private function consult(): void
     {
         $days = $this->consultDays();
-        $hours  = $this->consultHours();
+        $hours = $this->consultHours();
 
         $days = json_decode(json_encode($days), true);
         $hours = json_decode(json_encode($hours), true);
@@ -128,30 +139,31 @@ class Tomorrow
     /**
      * Retorna os campos que devem ser retornados na consulta
      *
-     * @return Collection
+     * @param Timestep $timestep
+     * @return array
      */
-    private function fields(Timestep $timestep): Collection
+    private function fields(Timestep $timestep): array
     {
         $params = [
-            new Field('precipitationIntensity', FieldComparison::Bigger),
-            new Field('windDirection', FieldComparison::Frequency),
-            new Field('windSpeed', FieldComparison::Bigger),
-            new Field('precipitationProbability', FieldComparison::Bigger),
-            new Field('precipitationType', FieldComparison::Frequency),
-            new Field('temperature', FieldComparison::Bigger),
-            new Field('temperatureApparent', FieldComparison::Bigger),
-            new Field('temperatureMax', FieldComparison::Bigger),
-            new Field('temperatureMin', FieldComparison::Smaller),
-            new Field('weatherCode', FieldComparison::Frequency),
-            new Field('humidity', FieldComparison::Smaller),
+            'precipitationIntensity',
+            'windDirection',
+            'windSpeed',
+            'precipitationProbability',
+            'precipitationType',
+            'temperature',
+            'temperatureApparent',
+            'temperatureMax',
+            'temperatureMin',
+            'weatherCode',
+            'humidity',
         ];
 
         if ($timestep == Timestep::Day) {
-            $params[] = new Field('sunriseTime', FieldComparison::Frequency);
-            $params[] = new Field('sunsetTime', FieldComparison::Frequency);
+            $params[] = 'sunriseTime';
+            $params[] = 'sunsetTime';
         }
 
-        return new Collection($params);
+        return $params;
     }
 
     /**
@@ -213,7 +225,8 @@ class Tomorrow
     }
 
     /**
-     * Coloca as informações de cada hora nos seus respectivos dias
+     * Coloca as informações de cada hora nos seus respectivos dias e adiciona os campos de descrição, dia da semana e
+     * imagem
      *
      * @param array $days
      * @param array $hours
@@ -230,16 +243,15 @@ class Tomorrow
                 $endDay = $startDay->copy()->endOfDay();
 
                 if ($carbonHour->betweenIncluded($startDay, $endDay)) {
-                    $hour['values']['weatherCodeDescription'] =
-                        $this->weatherCodeDescription($hour['values']['weatherCode']);
+                    $hour['values']['weatherCodeDescription'] = Weather::get($hour['values']['weatherCode'])->value;
 
                     $this->identifyIcon($hour, $day);
 
                     $day['hours'][] = $hour;
                 }
 
-                $day['values']['weatherCodeDescription'] = $this->weatherCodeDescription($day['values']['weatherCode']);
-                $day['values']['dayOfWeek'] = $this->nameyDayOfWeek($startDay);
+                $day['values']['weatherCodeDescription'] = Weather::get($day['values']['weatherCode'])->value;
+                $day['values']['dayOfWeek'] = DayOfWeek::get($startDay->dayOfWeek)->value;
 
                 $path = 'images/icons/weather/large/png/' . $day['values']['weatherCode'] . '0_large@2x.png';
                 $day['values']['weatherIcon'] = asset($path);
@@ -250,68 +262,6 @@ class Tomorrow
     }
 
     /**
-     * Retorna nome do dia da semana para a data informada
-     *
-     * @param Carbon $day
-     * @return string
-     */
-    public function nameyDayOfWeek(Carbon $day): string
-    {
-        $weekMap = [
-            0 => 'Domingo',
-            1 => 'Segunda-feira',
-            2 => 'Terça-feira',
-            3 => 'Quarta-feira',
-            4 => 'Quinta-feira',
-            5 => 'Sexta-feira',
-            6 => 'Sábado',
-        ];
-
-        return $weekMap[$day->dayOfWeek];
-    }
-
-    /**
-     * Identiica a descrição do clima segundo o ícone
-     *
-     * @param int $weatherCode
-     * @return string
-     */
-    public function weatherCodeDescription(int $weatherCode): string
-    {
-        $descriptions = [
-            0    => '',
-            1000 => 'Limpo',
-            1001 => 'Nublado',
-            1100 => 'Predominantemente Limpo',
-            1101 => 'Parcialmente Nublado',
-            1102 => 'Predominantemente nublado',
-            2000 => 'Névoa',
-            2100 => 'Nevoeiro Leve',
-            3000 => 'Vento Leve',
-            3001 => 'Vento',
-            3002 => 'Strong Wind',
-            4000 => 'Chuvisco',
-            4001 => 'Chuva',
-            4200 => 'Chuva Leve',
-            4201 => 'Chuva Pesada',
-            5000 => 'Neve',
-            5001 => 'Rajadas',
-            5100 => 'Pouca Neve',
-            5101 => 'Neve Pesada',
-            6000 => 'Garoa Congelante',
-            6001 => 'Chuva Congelante',
-            6200 => 'Chuva Leve e Congelante',
-            6201 => 'Chuva Pesada e Congelante',
-            7000 => 'Pelotas de Gelo',
-            7101 => 'Pelotas de Gelo Pesado',
-            7102 => 'Pelotas de Gelo Leves',
-            8000 => 'Trovoadas',
-        ];
-
-        return $descriptions[$weatherCode];
-    }
-
-    /**
      * Monta a URL para onde deve ser lançada a requisição da API
      *
      * @param Timestep $timestep
@@ -319,10 +269,10 @@ class Tomorrow
      */
     private function url(Timestep $timestep): string
     {
-        $fields = $this->fields($timestep)->implode('name', ',');
+        $fields = implode(',', $this->fields($timestep));
 
         $params = [
-            "apikey"    => $this->apiKey,
+            "apikey"    => self::API_KEY,
             "location"  => $this->location,
             "fields"    => $fields,
             "startTime" => $this->startTime->toISOString(),
@@ -333,7 +283,7 @@ class Tomorrow
 
         $queryString = http_build_query($params);
 
-        return $this->baseUrl . '?' . $queryString;
+        return self::BASE_URL . '?' . $queryString;
     }
 
     /**
