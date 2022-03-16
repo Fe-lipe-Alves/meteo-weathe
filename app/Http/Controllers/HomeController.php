@@ -70,14 +70,4 @@ class HomeController extends Controller
             return Inertia::render('Error');
         }
     }
-
-    public function searchComplete(Request $request)
-    {
-        $response = Geoapify::consult($request->search);
-
-        return response()->json([
-            'success' => true,
-            'cities' => $response,
-        ]);
-    }
 }
