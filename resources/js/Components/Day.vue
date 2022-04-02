@@ -1,6 +1,6 @@
 <template>
 
-    <div class="w-4/12 lg:w-44 p-1 lg:px-0 last:hidden">
+    <div class="w-4/12 lg:w-44 p-1 lg:px-0 last:hidden lg:last:block">
         <div class="bg-grayish-white-200 pt-5 pb-3 px-5 rounded-md h-full">
 
             <p class="text-center text-sm" :title="day.values.dayOfWeek">
