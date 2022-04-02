@@ -14,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('cache.headers:public;max_age=86400;etag')->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/dashboard', [HomeController::class, 'images']);
