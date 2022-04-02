@@ -6,8 +6,10 @@ use App\Models\Image;
 use App\Services\Geoapify;
 use App\Services\IpInfo;
 use App\Services\Tomorrow;
+use App\Support\Enums\Weather;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response;
 use PHPUnit\Exception;
@@ -52,9 +54,9 @@ class HomeController extends Controller
 
             $nextHours = $tomorrow->nextHours(24);
 
-            $image = Image::query()->where()->first();
+            $image = Image::getByWeather($now['values']['weatherCode']);
 
-            $imageBackground = asset($image->path);
+            $imageBackground = asset($image);
 
             return Inertia::render('Home', [
                 'dataNow'       => $now,
@@ -62,12 +64,27 @@ class HomeController extends Controller
                 'dataNextDays'  => $nextDays,
                 'dataNextHours' => $nextHours,
                 'imageBackground' => $imageBackground,
-                'links'         => [
-                    'search_complete' => route('search-complete')
-                ]
             ]);
         } catch (Exception) {
             return Inertia::render('Error');
         }
+    }
+
+    public function images()
+    {
+        $weathers = array_map(function ($item) {
+            $item = (array)$item;
+            $item['active'] = false;
+
+            return $item;
+        }, Weather::cases());
+
+        $weathers = Arr::where($weathers, function($item) {
+            return !empty($item['value']);
+        });
+
+        return Inertia::render('Dashboard', [
+            'weathers' => $weathers
+        ]);
     }
 }
