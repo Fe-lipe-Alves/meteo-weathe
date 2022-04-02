@@ -35,78 +35,6 @@
             </div>
         </section>
 
-<!--        <aside class="absolute top-0 right-0 bottom-0 bg-white h-full w-full lg:w-3/12 shadow-2xl" v-if="boxNewImage">
-
-            &lt;!&ndash; Cabeçalho &ndash;&gt;
-            <div class="w-full flex justify-between p-5">
-                <div class="flex">
-                    <span class="self-end">Nova imagem</span>
-                </div>
-
-                <div>
-                    <button
-                        class="text-3xl px-2"
-                        title="Fechar"
-                        @click="() => { boxNewImage = false }"
-                    >
-                        &times;
-                    </button>
-                </div>
-            </div>
-            &lt;!&ndash; Fim Cabeçalho &ndash;&gt;
-
-            <hr>
-
-            <form action="/" method="post" class="w-full flex flex-col p-5" enctype="multipart/form-data">
-                <div class="w-full mt-4">
-                    <label for="weather">Clima:</label>
-                    <select class="border border-gray-700 text-gray-700 px-3 py-1 w-full focus:outline-none" id="weather">
-                        <option>Chuva</option>
-                    </select>
-                </div>
-
-                <div class="w-full mt-4">
-                    <label for="period">Período:</label>
-                    <select class="border border-gray-700 text-gray-700 px-3 py-1 w-full focus:outline-none" id="period">
-                        <option>Dia</option>
-                        <option>Noite</option>
-                    </select>
-                </div>
-
-                <div class="w-full mt-4">
-                    <label for="input_file">Imagem:</label>
-                    <label for="input_file" class="border border-gray-500 text-gray-500 px-3 py-1 w-full focus:outline-none block text-sm">
-                        Clique para selecionar
-                    </label>
-                    <input
-                        type="file"
-                        class="hidden"
-                        id="input_file"
-                        name="input_file"
-                        @change="changeInput(this)"
-                        v-model="imagePreview.data"
-                    >
-
-                    <div class="w-full mt-4 px-4">
-                        <img
-                            :src="imagePreview.url"
-                            class="w-full h-full object-cover overflow-hidden"
-                            v-if="imagePreview.data !== null"
-                        >
-                    </div>
-                </div>
-
-                <hr class="mt-4">
-
-                <div class="w-full mt-4 flex justify-center">
-                    <button class="text-md font-roboto self-end border bg-gray-700 text-white rounded-md px-3 py-1">
-                        Salvar
-                    </button>
-                </div>
-            </form>
-
-        </aside>-->
-
         <section class="w-11/12 mx-auto flex pt-14 flex-wrap">
             <div class="w-4/12 p-1" v-for="image in images" :key="image">
                 <div class="h-full ">
@@ -118,14 +46,24 @@
             </div>
         </section>
 
-        <aside class="w-full h-full absolute top-0 left-0 bg-transparent flex justify-center items-center">
+        <aside
+            class="w-full h-full absolute top-0 left-0 bg-transparent flex justify-center items-center"
+            v-if="boxNewImage"
+        >
             <div id="modal" class="w-8/12 h-4/5 bg-white shadow-2xl rounded-xl overflow-auto">
                 <form action="#" method="post" class="w-full px-16 pt-8 pb-0">
                     <div class="flex justify-between items-center border-b">
                         <h5>
                             Nova imagem de background
                         </h5>
-                        <span class="text-3xl">&times;</span>
+                        <button
+                            type="button"
+                            class="text-3xl px-2"
+                            title="Fechar"
+                            @click="() => { boxNewImage = false }"
+                        >
+                            &times;
+                        </button>
                     </div>
 
                     <div class="w-full py-5">

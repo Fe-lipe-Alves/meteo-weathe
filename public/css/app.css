@@ -440,9 +440,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-0{
   top: 0px;
 }
-.bottom-0{
-  bottom: 0px;
-}
 .left-0{
   left: 0px;
 }
@@ -504,15 +501,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-3{
   margin-right: 0.75rem;
 }
-.mt-4{
-  margin-top: 1rem;
-}
-.mt-16{
-  margin-top: 4rem;
-}
-.block{
-  display: block;
-}
 .inline-block{
   display: inline-block;
 }
@@ -557,9 +545,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-8\/12{
   width: 66.666667%;
-}
-.w-1\/2{
-  width: 50%;
 }
 .w-14{
   width: 3.5rem;
@@ -632,10 +617,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
-.border-gray-500{
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
 .border-purple-800{
   --tw-border-opacity: 1;
   border-color: rgb(107 33 168 / var(--tw-border-opacity));
@@ -668,10 +649,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-grayish-white-200\/25{
   background-color: rgb(242 242 242 / 0.25);
 }
-.bg-gray-700{
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-}
 .bg-purple-300{
   --tw-bg-opacity: 1;
   background-color: rgb(216 180 254 / var(--tw-bg-opacity));
@@ -694,9 +671,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .p-1{
   padding: 0.25rem;
-}
-.p-5{
-  padding: 1.25rem;
 }
 .p-2{
   padding: 0.5rem;
@@ -824,17 +798,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
-.text-gray-500{
+.text-black{
   --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.text-black{
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .shadow-2xl{
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);

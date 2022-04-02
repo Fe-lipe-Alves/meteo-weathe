@@ -19948,6 +19948,7 @@ var _hoisted_9 = {
 };
 var _hoisted_10 = ["src"];
 var _hoisted_11 = {
+  key: 0,
   "class": "w-full h-full absolute top-0 left-0 bg-transparent flex justify-center items-center"
 };
 var _hoisted_12 = {
@@ -19959,67 +19960,66 @@ var _hoisted_13 = {
   method: "post",
   "class": "w-full px-16 pt-8 pb-0"
 };
-
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_14 = {
   "class": "flex justify-between items-center border-b"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Nova imagem de background "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-3xl"
-}, "×")], -1
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Nova imagem de background ", -1
 /* HOISTED */
 );
 
-var _hoisted_15 = {
+var _hoisted_16 = {
   "class": "w-full py-5"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Clima:", -1
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Clima:", -1
 /* HOISTED */
 );
 
-var _hoisted_17 = {
+var _hoisted_18 = {
   "class": "my-3 flex flex-wrap"
 };
-var _hoisted_18 = ["value", "onUpdate:modelValue", "id"];
-var _hoisted_19 = ["for"];
-var _hoisted_20 = {
+var _hoisted_19 = ["value", "onUpdate:modelValue", "id"];
+var _hoisted_20 = ["for"];
+var _hoisted_21 = {
   "class": "w-full p-2"
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
   "class": "inline-flex mr-3"
 }, "Período:", -1
 /* HOISTED */
 );
 
-var _hoisted_22 = {
+var _hoisted_23 = {
   "class": "inline-flex flex-wrap"
 };
-var _hoisted_23 = ["value", "id", "onChange"];
-var _hoisted_24 = ["for"];
-var _hoisted_25 = {
+var _hoisted_24 = ["value", "id", "onChange"];
+var _hoisted_25 = ["for"];
+var _hoisted_26 = {
   "class": "w-full p-2"
 };
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
   "class": "inline-flex mr-3"
 }, "Imagem:", -1
 /* HOISTED */
 );
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "file_image",
   "class": "text-xs px-2 py-1 border border-gray-400 rounded-md inline-block m-1 cursor-default hover:bg-purple-50 text-gray-700"
 }, " Selecionar imagem ", -1
 /* HOISTED */
 );
 
-var _hoisted_28 = {
+var _hoisted_29 = {
   key: 0,
   "class": "w-full flex justify-center max-h-80 bg-gray-50 py-2"
 };
-var _hoisted_29 = ["src"];
+var _hoisted_30 = ["src"];
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex justify-center items-center border-t py-2 mt-8"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
@@ -20034,7 +20034,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       $data.boxNewImage = true;
     })
-  }, " Nova imagem ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <aside class=\"absolute top-0 right-0 bottom-0 bg-white h-full w-full lg:w-3/12 shadow-2xl\" v-if=\"boxNewImage\">\n\n            &lt;!&ndash; Cabeçalho &ndash;&gt;\n            <div class=\"w-full flex justify-between p-5\">\n                <div class=\"flex\">\n                    <span class=\"self-end\">Nova imagem</span>\n                </div>\n\n                <div>\n                    <button\n                        class=\"text-3xl px-2\"\n                        title=\"Fechar\"\n                        @click=\"() => { boxNewImage = false }\"\n                    >\n                        &times;\n                    </button>\n                </div>\n            </div>\n            &lt;!&ndash; Fim Cabeçalho &ndash;&gt;\n\n            <hr>\n\n            <form action=\"/\" method=\"post\" class=\"w-full flex flex-col p-5\" enctype=\"multipart/form-data\">\n                <div class=\"w-full mt-4\">\n                    <label for=\"weather\">Clima:</label>\n                    <select class=\"border border-gray-700 text-gray-700 px-3 py-1 w-full focus:outline-none\" id=\"weather\">\n                        <option>Chuva</option>\n                    </select>\n                </div>\n\n                <div class=\"w-full mt-4\">\n                    <label for=\"period\">Período:</label>\n                    <select class=\"border border-gray-700 text-gray-700 px-3 py-1 w-full focus:outline-none\" id=\"period\">\n                        <option>Dia</option>\n                        <option>Noite</option>\n                    </select>\n                </div>\n\n                <div class=\"w-full mt-4\">\n                    <label for=\"input_file\">Imagem:</label>\n                    <label for=\"input_file\" class=\"border border-gray-500 text-gray-500 px-3 py-1 w-full focus:outline-none block text-sm\">\n                        Clique para selecionar\n                    </label>\n                    <input\n                        type=\"file\"\n                        class=\"hidden\"\n                        id=\"input_file\"\n                        name=\"input_file\"\n                        @change=\"changeInput(this)\"\n                        v-model=\"imagePreview.data\"\n                    >\n\n                    <div class=\"w-full mt-4 px-4\">\n                        <img\n                            :src=\"imagePreview.url\"\n                            class=\"w-full h-full object-cover overflow-hidden\"\n                            v-if=\"imagePreview.data !== null\"\n                        >\n                    </div>\n                </div>\n\n                <hr class=\"mt-4\">\n\n                <div class=\"w-full mt-4 flex justify-center\">\n                    <button class=\"text-md font-roboto self-end border bg-gray-700 text-white rounded-md px-3 py-1\">\n                        Salvar\n                    </button>\n                </div>\n            </form>\n\n        </aside>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.images, function (image) {
+  }, " Nova imagem ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.images, function (image) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "w-4/12 p-1",
       key: image
@@ -20046,7 +20046,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_10)])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("aside", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_17, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.weathers, function (weather) {
+  ))]), $data.boxNewImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("aside", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "text-3xl px-2",
+    title: "Fechar",
+    onClick: _cache[1] || (_cache[1] = function () {
+      $data.boxNewImage = false;
+    })
+  }, " × ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.weathers, function (weather) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       key: weather.name,
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-xs border border-purple-800 rounded-full inline-block m-1 cursor-default", weather.active ? 'bg-purple-300 text-black' : 'hover:bg-purple-100 text-gray-700'])
@@ -20062,17 +20069,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       required: ""
     }, null, 8
     /* PROPS */
-    , _hoisted_18), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, weather.active]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    , _hoisted_19), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, weather.active]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "for": 'weather_' + weather.name,
       "class": "px-2 py-1 inline-block rounded-full"
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(weather.value), 9
     /* TEXT, PROPS */
-    , _hoisted_19)], 2
+    , _hoisted_20)], 2
     /* CLASS */
     );
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_22, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.periods, function (period) {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_23, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.periods, function (period) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       key: period.value,
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-xs border border-r-0 border-purple-800 first:rounded-l-full last:rounded-r-full last:border-r inline-block cursor-default w-14 text-center", $data.periodActive === period.value ? 'bg-purple-300 text-black' : 'hover:bg-purple-100 text-gray-700'])
@@ -20088,33 +20095,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       required: ""
     }, null, 40
     /* PROPS, HYDRATE_EVENTS */
-    , _hoisted_23), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "for": 'period_' + period.value,
       "class": "px-2 py-1 inline-block rounded-full"
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(period.name), 9
     /* TEXT, PROPS */
-    , _hoisted_24)], 2
+    , _hoisted_25)], 2
     /* CLASS */
     );
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
     id: "file_image",
     "class": "hidden",
-    onChange: _cache[1] || (_cache[1] = function () {
+    onChange: _cache[2] || (_cache[2] = function () {
       return $options.changeInput && $options.changeInput.apply($options, arguments);
     }),
     required: ""
   }, null, 32
   /* HYDRATE_EVENTS */
-  ), _hoisted_27]), !!$data.imagePreview.data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  ), _hoisted_28]), !!$data.imagePreview.data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $data.imagePreview.data,
     alt: "Previsão da imagem",
     "class": "object-contain"
   }, null, 8
   /* PROPS */
-  , _hoisted_29)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_30])])])]);
+  , _hoisted_30)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_31])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
