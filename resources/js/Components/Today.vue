@@ -101,11 +101,10 @@
 <script>
 import axios from "axios"
 import moment from "moment/moment";
-import SearchIcon from "../Icons/SearchIcon";
 
 export default {
     name: "Today",
-    components: {SearchIcon},
+    components: {},
     props: {
         dataNow: Object,
         dataToday: Object,
