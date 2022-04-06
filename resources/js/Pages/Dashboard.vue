@@ -24,7 +24,7 @@
                     <div class="w-6/12 lg:w-auto lg:inline order-1 whitespace-nowrap text-shadow absolute right-0">
                         <button
                             class="text-md font-roboto self-end border border-gray-700 text-gray-700 rounded-md px-3 py-1"
-                            @click="() => { boxNewImage = true }"
+                            @click="openModal"
                         >
                             Nova imagem
                         </button>
@@ -51,7 +51,7 @@
             v-if="boxNewImage"
         >
             <div id="modal" class="w-8/12 h-4/5 bg-white shadow-2xl rounded-xl overflow-auto">
-                <form action="#" method="post" class="w-full px-16 pt-8 pb-0">
+                <form action="#" method="post" class="w-full px-16 pt-8 pb-0" @submit.prevent="submit">
                     <div class="flex justify-between items-center border-b">
                         <h5>
                             Nova imagem de background
@@ -60,7 +60,7 @@
                             type="button"
                             class="text-3xl px-2"
                             title="Fechar"
-                            @click="() => { boxNewImage = false }"
+                            @click="openModal"
                         >
                             &times;
                         </button>
@@ -81,7 +81,7 @@
                                     :value="weather.name"
                                     v-model="weather.active"
                                     :id="'weather_'+weather.name"
-                                    required
+                                    @change="changeWeather($event)"
                                 >
                                 <label :for="'weather_'+weather.name" class=" px-2 py-1 inline-block rounded-full">
                                     {{ weather.value }}
@@ -96,7 +96,7 @@
                             <li
                                 v-for="period in periods" :key="period.value"
                                 class="text-xs border border-r-0 border-purple-800 first:rounded-l-full last:rounded-r-full last:border-r inline-block cursor-default w-14 text-center"
-                                :class="periodActive === period.value ? 'bg-purple-300 text-black' : 'hover:bg-purple-100 text-gray-700'"
+                                :class="newImage.period === period.value ? 'bg-purple-300 text-black' : 'hover:bg-purple-100 text-gray-700'"
                             >
                                 <input
                                     type="radio"
@@ -104,8 +104,7 @@
                                     class="hidden"
                                     :value="period.value"
                                     :id="'period_'+period.value"
-                                    @change="() => { periodActive = period.value }"
-                                    required
+                                    @change="() => { newImage.period = period.value }"
                                 >
                                 <label :for="'period_'+period.value" class=" px-2 py-1 inline-block rounded-full">
                                     {{ period.name }}
@@ -116,7 +115,12 @@
 
                     <div class="w-full p-2">
                         <h6 class="inline-flex mr-3">Imagem:</h6>
-                        <input type="file" id="file_image" class="hidden" @change="changeInput" required>
+                        <input
+                            type="file"
+                            id="file_image"
+                            class="hidden"
+                            @input="newImage.image = $event.target.files[0]"
+                            @change="changeImage" >
                         <label
                             for="file_image"
                             class="text-xs px-2 py-1 border border-gray-400 rounded-md inline-block m-1 cursor-default hover:bg-purple-50 text-gray-700"
@@ -125,8 +129,8 @@
                         </label>
                     </div>
 
-                    <div class="w-full flex justify-center max-h-80 bg-gray-50 py-2" v-if="!!imagePreview.data">
-                        <img :src="imagePreview.data" alt="Previsão da imagem" class="object-contain">
+                    <div class="w-full flex justify-center max-h-80 bg-gray-50 py-2" v-if="!!previewImage">
+                        <img :src="previewImage" alt="Previsão da imagem" class="object-contain">
                     </div>
 
                     <div class="flex justify-center items-center border-t py-2 mt-8">
@@ -142,6 +146,9 @@
 </template>
 
 <script>
+import {reactive, ref} from "vue";
+import {Inertia} from "@inertiajs/inertia";
+
 export default {
     name: "Dashboard",
     props: {
@@ -160,34 +167,50 @@ export default {
             ]
         },
     },
-    data() {
-        return {
-            boxNewImage: false,
-            imagePreview: {
-                data: null,
-                url: null,
-            },
-            periodActive: null,
-        }
-    },
-    methods: {
-        changeInput(input) {
-            let file = input.target.files[0];
-            // this.imagePreview.url = URL.createObjectURL(this.imagePreview.data);
-            // console.log(this.previewImage)
+    setup () {
+        const newImage = reactive({
+                weather: [],
+                period: null,
+                image: {
+                    base64: null
+                }
+            })
+        let boxNewImage = ref(false),
+            previewImage = ref('')
 
-            if (file) {
+        function changeImage() {
+            if (newImage.image) {
                 let reader = new FileReader
                 reader.onload = e => {
-                    this.imagePreview.data = e.target.result
+                    previewImage.value = e.target.result
                 }
-                reader.readAsDataURL(file)
-                // this.$emit('input', file)
+                reader.readAsDataURL(newImage.image)
             }
-        },
+        }
+
+        function changeWeather(event) {
+            const value = event.target.value,
+                checked = event.target.checked,
+                position = newImage.weather.indexOf(value)
+
+            if (checked && position === -1) {
+                newImage.weather.push(value)
+            } else if (!checked && position > -1) {
+                newImage.weather.splice(position, 1)
+            }
+        }
+
+        function openModal() {
+            boxNewImage.value = !boxNewImage.value;
+            console.log(boxNewImage)
+        }
+
+        function submit() {
+            Inertia.post('/dashboard', newImage)
+        }
+
+        return { newImage, boxNewImage, previewImage, openModal, changeImage, changeWeather, submit }
     },
-    mounted() {
-    }
 }
 </script>
 
