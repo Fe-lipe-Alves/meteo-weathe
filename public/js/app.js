@@ -19561,10 +19561,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-4/12 lg:w-44 p-1 lg:px-0 last:hidden lg:last:block"
+  "class": "w-2/12 lg:w-44 px-0.5 lg:p-1 lg:px-0 last:hidden lg:last:block"
 };
 var _hoisted_2 = {
-  "class": "bg-grayish-white-200 pt-5 pb-3 px-5 rounded-md h-full"
+  "class": "bg-grayish-white-200 pt-5 pb-3 px-1 lg:px-5 rounded-md h-full text-center lg:text-left"
 };
 var _hoisted_3 = ["title"];
 var _hoisted_4 = {
@@ -19572,15 +19572,21 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["src", "title"];
 var _hoisted_6 = {
-  "class": "flex justify-center py-4"
+  "class": "flex justify-center py-4 flex-col lg:flex-row"
 };
 var _hoisted_7 = {
-  "class": "text-xl lg:text-2xl mr-2"
+  "class": "w-full lg:w-6/12"
 };
 var _hoisted_8 = {
-  "class": "text-md lg:text-lg ml-2 text-gray-700"
+  "class": "text-xl lg:text-2xl mr-2"
 };
 var _hoisted_9 = {
+  "class": "w-full lg:w-6/12"
+};
+var _hoisted_10 = {
+  "class": "text-md lg:text-lg ml-2 text-gray-700"
+};
+var _hoisted_11 = {
   "class": "text-xs"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -19595,11 +19601,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "w-12"
   }, null, 8
   /* PROPS */
-  , _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMax)) + "°C ", 1
+  , _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMax)) + "°C ", 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMin)) + "°C ", 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc($props.day.values.temperatureMin)) + "°C ", 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.day.values.weatherCodeDescription), 1
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.day.values.weatherCodeDescription), 1
   /* TEXT */
   )])]);
 }
@@ -19651,7 +19657,7 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "w-11/12 mx-auto flex justify-between pt-14"
+  "class": "w-full lg:w-11/12 mx-auto px-1 lg:px-0 flex justify-between pt-14"
 };
 var _hoisted_2 = {
   "class": "bg-grayish-white-100 w-full pt-5 pb-3 px-5 rounded-md"
@@ -19698,11 +19704,15 @@ var _hoisted_9 = {
 };
 var _hoisted_10 = ["src", "title"];
 var _hoisted_11 = {
+  "class": "text-sm font-medium my-1",
+  title: "Temperatura"
+};
+var _hoisted_12 = {
   "class": "text-sm my-1 flex",
   title: "Probabilidade de chuva"
 };
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: "/images/icons/weather/rain.svg",
     alt: "Probabilidade de chuva",
@@ -19712,12 +19722,12 @@ var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_13 = {
+var _hoisted_14 = {
   "class": "text-sm my-1 mb-5 flex",
   title: "Velocidade do vento"
 };
 
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 5.81 10.124",
@@ -19746,9 +19756,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "w-12"
     }, null, 8
     /* PROPS */
-    , _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hour.values.precipitationProbability) + " % ", 1
+    , _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc(hour.values.temperatureApparent)) + "°C ", 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc(hour.values.windSpeed)) + " km/h ", 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hour.values.precipitationProbability) + " % ", 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.trunc(hour.values.windSpeed)) + " km/h ", 1
     /* TEXT */
     )])])]);
   }), 128
@@ -20254,7 +20266,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-11/12 mx-auto flex justify-between pt-14 flex-wrap"
+  "class": "w-full lg:w-11/12 mx-auto flex justify-between pt-14 px-1 lg:px-0 flex-wrap"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Today = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Today");
