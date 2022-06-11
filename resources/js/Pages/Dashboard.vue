@@ -41,6 +41,7 @@
                     <img
                         :src="image.path"
                         class="w-full h-full object-cover rounded-md overflow-hidden"
+                        @click="loadForm(image.id)"
                     >
                 </div>
             </div>
@@ -64,7 +65,7 @@
                             type="button"
                             class="text-3xl px-2"
                             title="Fechar"
-                            @click="openModal"
+                            @click="closeModal"
                         >
                             &times;
                         </button>
@@ -140,10 +141,17 @@
                         <img :src="previewImage" alt="Previsão da imagem" class="object-contain">
                     </div>
 
-                    <div class="flex justify-center items-center border-t py-2 mt-8 flex-col">
+                    <div class="flex justify-center items-center border-t py-2 mt-8">
+                        <inertia-link
+                            :href="'/deletar/'+newImage.id"
+                            class="rounded-lg text-md px-4 py-2 mx-2 bg-red-400 text-white"
+                            v-if="!!newImage.id"
+                        >
+                            Apagar
+                        </inertia-link>
                         <button
                             type="submit"
-                            class="rounded-lg text-md px-4 py-2 bg-gray-500 text-white self-end"
+                            class="rounded-lg text-md px-4 py-2 mx-2 bg-gray-500 text-white"
                             :disabled="newImage.processing"
                         >
                             Enviar
@@ -192,7 +200,7 @@ export default {
             }
         }
     },
-    setup () {
+    setup (props) {
         const newImage = useForm({
                 id: null,
                 weather: [],
@@ -214,8 +222,13 @@ export default {
         }
 
         function openModal() {
-            boxNewImage.value = !boxNewImage.value;
-            console.log(boxNewImage)
+            boxNewImage.value = true
+        }
+
+        function closeModal() {
+            newImage.reset()
+            boxNewImage.value = false
+            previewImage.value = ''
         }
 
         function submit() {
@@ -223,16 +236,28 @@ export default {
                 preserveScroll: true,
                 onSuccess: () => {
                     boxNewImage.value = false
-                    resetForm()
+                    closeModal()
                 }
             })
         }
 
-        function resetForm() {
-            newImage.reset()
+        function loadForm(image_id) {
+            const image = props.images.filter((item) => {
+                return item.id === image_id
+            })[0]
+
+            newImage.weather = image.weathers.map((item) => {
+                return item.code
+            })
+            newImage.period = image.period
+            newImage.id = image.id
+
+            previewImage.value = image.path
+
+            openModal()
         }
 
-        return { newImage, boxNewImage, previewImage, viewMessage, openModal, changeImage, submit }
+        return { newImage, boxNewImage, previewImage, viewMessage, openModal, closeModal, changeImage, submit, loadForm }
     },
     created () {
         setTimeout(() => {
