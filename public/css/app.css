@@ -519,6 +519,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-4\/5{
   height: 80%;
 }
+.h-2{
+  height: 0.5rem;
+}
 .max-h-80{
   max-height: 20rem;
 }
@@ -661,6 +664,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
+.bg-green-200{
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 247 208 / var(--tw-bg-opacity));
+}
+.bg-red-200{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+}
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -801,6 +812,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-black{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+.text-red-500{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .text-white{
   --tw-text-opacity: 1;
