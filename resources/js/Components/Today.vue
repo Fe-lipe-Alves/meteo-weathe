@@ -12,7 +12,7 @@
                     <form action="/" method="post" class="w-full">
                         <div class="w-full lg:w-[30rem] mx-auto relative">
                             <div
-                                class="w-full py-2 px-4 text-center rounded-full"
+                                class="w-full py-2 px-4 text-center rounded-full border border-white/25"
                                 title="Pesquisar cidade"
                                 :class="inputFocus ? 'bg-white' : 'bg-transparent hover:bg-white/25'"
                             >
