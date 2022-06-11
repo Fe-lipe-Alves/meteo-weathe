@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/dashboard', [ImageController::class, 'images'])->name('dashboard');
 Route::post('/dashboard', [ImageController::class, 'newImage']);
+Route::get('/deletar/{image}', [ImageController::class, 'delete']);
