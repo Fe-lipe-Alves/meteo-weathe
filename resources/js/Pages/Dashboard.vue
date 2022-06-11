@@ -21,7 +21,7 @@
                         </form>
                     </div>
 
-                    <div class="w-6/12 lg:w-auto lg:inline order-1 whitespace-nowrap text-shadow absolute right-0">
+                    <div class="w-6/12 lg:w-auto text-right inline order-1 whitespace-nowrap text-shadow absolute right-0">
                         <button
                             class="text-md font-roboto self-end border border-gray-700 text-gray-700 rounded-md px-3 py-1"
                             @click="openModal"
@@ -55,8 +55,8 @@
             class="w-full h-full absolute top-0 left-0 bg-transparent flex justify-center items-center"
             v-if="boxNewImage"
         >
-            <div id="modal" class="w-8/12 h-4/5 bg-white shadow-2xl rounded-xl overflow-auto">
-                <form action="#" method="post" class="w-full px-16 pt-8 pb-0" @submit.prevent="submit">
+            <div id="modal" class="w-11/12 lg:w-8/12 h-4/5 bg-white shadow-2xl rounded-xl overflow-auto">
+                <form action="#" method="post" class="w-full px-4 lg:px-16 pt-8 pb-0" @submit.prevent="submit">
                     <div class="flex justify-between items-center border-b">
                         <h5>
                             Nova imagem de background
