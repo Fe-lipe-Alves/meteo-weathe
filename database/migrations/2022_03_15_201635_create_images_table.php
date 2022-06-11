@@ -17,8 +17,6 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('path');
             $table->integer('period');
-            $table->string('weather');
-            $table->boolean('active');
             $table->timestamps();
         });
     }
