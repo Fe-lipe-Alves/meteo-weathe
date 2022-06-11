@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
-use App\Services\Geoapify;
 use App\Services\IpInfo;
 use App\Services\Tomorrow;
-use App\Support\Enums\Weather;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response;
 use PHPUnit\Exception;
@@ -26,7 +22,6 @@ class HomeController extends Controller
     public function index(Request $request): Response
     {
         try {
-
             if ($request->has('lat', 'lon', 'city')) {
                 $response = Tomorrow::consultCities($request->city);
                 $data = Arr::get($response, 'data.cities.0');
@@ -54,9 +49,16 @@ class HomeController extends Controller
 
             $nextHours = $tomorrow->nextHours(24);
 
-            $image = Image::getByWeather($now['values']['weatherCode']);
+            $image = \App\Models\Weather::query()
+                ->where('code', 'W_'.$now['values']['weatherCode'])
+                ->first()
+                ->getImageRamdon();
 
-            $imageBackground = asset($image);
+            if (!$image) {
+                $imageBackground = asset('images/backgrounds/background-005.jpg');
+            } else {
+                $imageBackground = $image->path;
+            }
 
             return Inertia::render('Home', [
                 'dataNow'       => $now,
@@ -68,23 +70,5 @@ class HomeController extends Controller
         } catch (Exception) {
             return Inertia::render('Error');
         }
-    }
-
-    public function images()
-    {
-        $weathers = array_map(function ($item) {
-            $item = (array)$item;
-            $item['active'] = false;
-
-            return $item;
-        }, Weather::cases());
-
-        $weathers = Arr::where($weathers, function($item) {
-            return !empty($item['value']);
-        });
-
-        return Inertia::render('Dashboard', [
-            'weathers' => $weathers
-        ]);
     }
 }
