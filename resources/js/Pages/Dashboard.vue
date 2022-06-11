@@ -36,13 +36,17 @@
         </section>
 
         <section class="w-11/12 mx-auto flex pt-14 flex-wrap">
-            <div class="w-4/12 p-1" v-for="image in images" :key="image">
-                <div class="h-full ">
+            <div class="w-4/12 p-1" v-for="image in images" :key="image.id">
+                <div class="h-full">
                     <img
-                        :src="'http://127.0.0.1:8000/images/backgrounds/background-00'+image+'.webp'"
+                        :src="image.path"
                         class="w-full h-full object-cover rounded-md overflow-hidden"
                     >
                 </div>
+            </div>
+
+            <div class="w-full p-1" v-if="images.length === 0">
+                <p class="text-center"><small>Não há imagens cadastradas.</small></p>
             </div>
         </section>
 
@@ -72,22 +76,22 @@
                             <li
                                 v-for="weather in weathers" :key="weather.name"
                                 class="text-xs border border-purple-800 rounded-full inline-block m-1 cursor-default"
-                                :class="weather.active ? 'bg-purple-300 text-black' : 'hover:bg-purple-100 text-gray-700'"
+                                :class="newImage.weather.indexOf(weather.name) > -1 ? 'bg-purple-300 text-black' : 'hover:bg-purple-100 text-gray-700'"
                             >
                                 <input
                                     type="checkbox"
                                     name="weather[]"
                                     class="hidden"
-                                    :value="weather.name"
-                                    v-model="weather.active"
                                     :id="'weather_'+weather.name"
-                                    @change="changeWeather($event)"
+                                    :value="weather.name"
+                                    v-model="newImage.weather"
                                 >
                                 <label :for="'weather_'+weather.name" class=" px-2 py-1 inline-block rounded-full">
                                     {{ weather.value }}
                                 </label>
                             </li>
                         </ul>
+                        <div v-if="newImage.errors.weather" class="text-xs text-red-500">{{ newImage.errors.weather }}</div>
                     </div>
 
                     <div class="w-full p-2">
@@ -104,13 +108,14 @@
                                     class="hidden"
                                     :value="period.value"
                                     :id="'period_'+period.value"
-                                    @change="() => { newImage.period = period.value }"
+                                    v-model="newImage.period"
                                 >
                                 <label :for="'period_'+period.value" class=" px-2 py-1 inline-block rounded-full">
                                     {{ period.name }}
                                 </label>
                             </li>
                         </ul>
+                        <div v-if="newImage.errors.period" class="text-xs text-red-500">{{ newImage.errors.period }}</div>
                     </div>
 
                     <div class="w-full p-2">
@@ -120,41 +125,54 @@
                             id="file_image"
                             class="hidden"
                             @input="newImage.image = $event.target.files[0]"
-                            @change="changeImage" >
+                            @change="changeImage"
+                        >
                         <label
                             for="file_image"
                             class="text-xs px-2 py-1 border border-gray-400 rounded-md inline-block m-1 cursor-default hover:bg-purple-50 text-gray-700"
                         >
                             Selecionar imagem
                         </label>
+                        <div v-if="newImage.errors.image" class="text-xs text-red-500">{{ newImage.errors.image }}</div>
                     </div>
 
                     <div class="w-full flex justify-center max-h-80 bg-gray-50 py-2" v-if="!!previewImage">
                         <img :src="previewImage" alt="Previsão da imagem" class="object-contain">
                     </div>
 
-                    <div class="flex justify-center items-center border-t py-2 mt-8">
-                        <button type="submit" class="rounded-lg text-md px-4 py-2 bg-gray-500 text-white">Enviar</button>
+                    <div class="flex justify-center items-center border-t py-2 mt-8 flex-col">
+                        <button
+                            type="submit"
+                            class="rounded-lg text-md px-4 py-2 bg-gray-500 text-white self-end"
+                            :disabled="newImage.processing"
+                        >
+                            Enviar
+                        </button>
                     </div>
                 </form>
 
             </div>
         </aside>
 
+        <div class="w-full absolute top-0 flex flex-col text-center">
+            <div v-if="viewMessage && !!fresh.success" class=" w-full py-1 text-xs bg-green-200">{{ fresh.success }}</div>
+            <div v-if="viewMessage && !!fresh.error" class=" w-full py-1 text-xs bg-red-200">{{ fresh.error }}</div>
+        </div>
+
     </div>
 
 </template>
 
 <script>
-import {reactive, ref} from "vue";
-import {Inertia} from "@inertiajs/inertia";
+import { ref } from "vue";
+import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
     name: "Dashboard",
     props: {
         images: {
             type: Array,
-            default: [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5]
+            default: []
         },
         weathers: {
             type: Array,
@@ -166,17 +184,24 @@ export default {
                 {name: 'Noite', value: 2},
             ]
         },
+        fresh: {
+            type: Array,
+            default: {
+                success: null,
+                error: null,
+            }
+        }
     },
     setup () {
-        const newImage = reactive({
+        const newImage = useForm({
+                id: null,
                 weather: [],
                 period: null,
-                image: {
-                    base64: null
-                }
+                image: null
             })
         let boxNewImage = ref(false),
-            previewImage = ref('')
+            previewImage = ref(''),
+            viewMessage = ref(true)
 
         function changeImage() {
             if (newImage.image) {
@@ -188,32 +213,56 @@ export default {
             }
         }
 
-        function changeWeather(event) {
-            const value = event.target.value,
-                checked = event.target.checked,
-                position = newImage.weather.indexOf(value)
-
-            if (checked && position === -1) {
-                newImage.weather.push(value)
-            } else if (!checked && position > -1) {
-                newImage.weather.splice(position, 1)
-            }
-        }
-
         function openModal() {
             boxNewImage.value = !boxNewImage.value;
             console.log(boxNewImage)
         }
 
         function submit() {
-            Inertia.post('/dashboard', newImage)
+            newImage.post('/dashboard', {
+                preserveScroll: true,
+                onSuccess: () => {
+                    boxNewImage.value = false
+                    resetForm()
+                }
+            })
         }
 
-        return { newImage, boxNewImage, previewImage, openModal, changeImage, changeWeather, submit }
+        function resetForm() {
+            newImage.reset()
+        }
+
+        return { newImage, boxNewImage, previewImage, viewMessage, openModal, changeImage, submit }
     },
+    created () {
+        setTimeout(() => {
+            this.viewMessage = false
+        }, 5000)
+    },
+    mounted() {
+        console.log(this.images)
+    }
 }
 </script>
 
 <style scoped>
 
+#progressBar {
+    width: 100%;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 4px;
+}
+
+#progress {
+    width: 100%;
+    height: 5px;
+    background-color: #4A90E2;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-color: #4A90E2;
+
+    transition: .5s;
+}
 </style>
