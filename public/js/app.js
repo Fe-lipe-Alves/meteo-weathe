@@ -19425,7 +19425,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  setup: function setup() {
+  setup: function setup(props) {
     var newImage = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
       id: null,
       weather: [],
@@ -19449,8 +19449,13 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     function openModal() {
-      boxNewImage.value = !boxNewImage.value;
-      console.log(boxNewImage);
+      boxNewImage.value = true;
+    }
+
+    function closeModal() {
+      newImage.reset();
+      boxNewImage.value = false;
+      previewImage.value = '';
     }
 
     function submit() {
@@ -19458,13 +19463,22 @@ __webpack_require__.r(__webpack_exports__);
         preserveScroll: true,
         onSuccess: function onSuccess() {
           boxNewImage.value = false;
-          resetForm();
+          closeModal();
         }
       });
     }
 
-    function resetForm() {
-      newImage.reset();
+    function loadForm(image_id) {
+      var image = props.images.filter(function (item) {
+        return item.id === image_id;
+      })[0];
+      newImage.weather = image.weathers.map(function (item) {
+        return item.code;
+      });
+      newImage.period = image.period;
+      newImage.id = image.id;
+      previewImage.value = image.path;
+      openModal();
     }
 
     return {
@@ -19473,8 +19487,10 @@ __webpack_require__.r(__webpack_exports__);
       previewImage: previewImage,
       viewMessage: viewMessage,
       openModal: openModal,
+      closeModal: closeModal,
       changeImage: changeImage,
-      submit: submit
+      submit: submit,
+      loadForm: loadForm
     };
   },
   created: function created() {
@@ -19873,7 +19889,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Topo"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full py-2 px-4 text-center rounded-full", $data.inputFocus ? 'bg-white' : 'bg-transparent hover:bg-white/25']),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full py-2 px-4 text-center rounded-full border border-white/25", $data.inputFocus ? 'bg-white' : 'bg-transparent hover:bg-white/25']),
     title: "Pesquisar cidade"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
@@ -20011,7 +20027,7 @@ var _hoisted_8 = {
 var _hoisted_9 = {
   "class": "h-full"
 };
-var _hoisted_10 = ["src"];
+var _hoisted_10 = ["src", "onClick"];
 var _hoisted_11 = {
   key: 0,
   "class": "w-full p-1"
@@ -20115,21 +20131,26 @@ var _hoisted_34 = {
 };
 var _hoisted_35 = ["src"];
 var _hoisted_36 = {
-  "class": "flex justify-center items-center border-t py-2 mt-8 flex-col"
+  "class": "flex justify-center items-center border-t py-2 mt-8"
 };
-var _hoisted_37 = ["disabled"];
-var _hoisted_38 = {
+
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Apagar ");
+
+var _hoisted_38 = ["disabled"];
+var _hoisted_39 = {
   "class": "w-full absolute top-0 flex flex-col text-center"
 };
-var _hoisted_39 = {
+var _hoisted_40 = {
   key: 0,
   "class": "w-full py-1 text-xs bg-green-200"
 };
-var _hoisted_40 = {
+var _hoisted_41 = {
   key: 1,
   "class": "w-full py-1 text-xs bg-red-200"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "text-md font-roboto self-end border border-gray-700 text-gray-700 rounded-md px-3 py-1",
     onClick: _cache[0] || (_cache[0] = function () {
@@ -20141,7 +20162,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: image.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: image.path,
-      "class": "w-full h-full object-cover rounded-md overflow-hidden"
+      "class": "w-full h-full object-cover rounded-md overflow-hidden",
+      onClick: function onClick($event) {
+        return $setup.loadForm(image.id);
+      }
     }, null, 8
     /* PROPS */
     , _hoisted_10)])]);
@@ -20159,7 +20183,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "text-3xl px-2",
     title: "Fechar",
     onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.openModal && $setup.openModal.apply($setup, arguments);
+      return $setup.closeModal && $setup.closeModal.apply($setup, arguments);
     })
   }, " × ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.weathers, function (weather) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
@@ -20235,17 +20259,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "object-contain"
   }, null, 8
   /* PROPS */
-  , _hoisted_35)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , _hoisted_35)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [!!$setup.newImage.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_inertia_link, {
+    key: 0,
+    href: '/deletar/' + $setup.newImage.id,
+    "class": "rounded-lg text-md px-4 py-2 mx-2 bg-red-400 text-white"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_37];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
-    "class": "rounded-lg text-md px-4 py-2 bg-gray-500 text-white self-end",
+    "class": "rounded-lg text-md px-4 py-2 mx-2 bg-gray-500 text-white",
     disabled: $setup.newImage.processing
   }, " Enviar ", 8
   /* PROPS */
-  , _hoisted_37)])], 32
+  , _hoisted_38)])], 32
   /* HYDRATE_EVENTS */
-  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [$setup.viewMessage && !!$props.fresh.success ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fresh.success), 1
+  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [$setup.viewMessage && !!$props.fresh.success ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fresh.success), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.viewMessage && !!$props.fresh.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fresh.error), 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.viewMessage && !!$props.fresh.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fresh.error), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
