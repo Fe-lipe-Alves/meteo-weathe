@@ -508,6 +508,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .inline-block{
   display: inline-block;
 }
+.inline{
+  display: inline;
+}
 .flex{
   display: flex;
 }
@@ -996,6 +999,10 @@ html, body, #app {
     width: 25%;
   }
 
+  .lg\:w-8\/12{
+    width: 66.666667%;
+  }
+
   .lg\:flex-row{
     flex-direction: row;
   }
@@ -1017,6 +1024,11 @@ html, body, #app {
   .lg\:px-10{
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .lg\:px-16{
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 
   .lg\:pb-0{

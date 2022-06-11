@@ -20019,7 +20019,7 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_7 = {
-  "class": "w-6/12 lg:w-auto lg:inline order-1 whitespace-nowrap text-shadow absolute right-0"
+  "class": "w-6/12 lg:w-auto text-right inline order-1 whitespace-nowrap text-shadow absolute right-0"
 };
 var _hoisted_8 = {
   "class": "w-11/12 mx-auto flex pt-14 flex-wrap"
@@ -20048,7 +20048,7 @@ var _hoisted_14 = {
 };
 var _hoisted_15 = {
   id: "modal",
-  "class": "w-8/12 h-4/5 bg-white shadow-2xl rounded-xl overflow-auto"
+  "class": "w-11/12 lg:w-8/12 h-4/5 bg-white shadow-2xl rounded-xl overflow-auto"
 };
 var _hoisted_16 = {
   "class": "flex justify-between items-center border-b"
@@ -20174,7 +20174,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), $props.images.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, _hoisted_13)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $setup.boxNewImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("aside", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     action: "#",
     method: "post",
-    "class": "w-full px-16 pt-8 pb-0",
+    "class": "w-full px-4 lg:px-16 pt-8 pb-0",
     onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.submit && $setup.submit.apply($setup, arguments);
     }, ["prevent"]))
