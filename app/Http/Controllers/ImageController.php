@@ -10,6 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Inertia\Inertia;
 
@@ -48,7 +49,7 @@ class ImageController extends Controller
             [
                 'weather' => ['required', 'array'],
                 'period'  => ['required', new Enum(Period::class)],
-                'image'   => ['nullable', 'file', 'image', 'required_without:id,null'],
+                'image'   => ['nullable', 'file', 'image', Rule::requiredIf(is_null($request->get('id')))],
                 'id'      => ['nullable', 'exists:images,id'],
             ],
             [
@@ -95,5 +96,12 @@ class ImageController extends Controller
             DB::rollBack();
             return redirect()->back()->with('fresh.error', 'Falha ao cadastrar imagem');
         }
+    }
+
+    public function delete(Image $image)
+    {
+        $image->weathers()->detach();
+        $image->delete();
+        return redirect()->route('dashboard');
     }
 }
