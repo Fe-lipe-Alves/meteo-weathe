@@ -1,7 +1,7 @@
 <template>
 
-    <div class="w-4/12 lg:w-44 p-1 lg:px-0 last:hidden lg:last:block">
-        <div class="bg-grayish-white-200 pt-5 pb-3 px-5 rounded-md h-full">
+    <div class="w-2/12 lg:w-44 px-0.5 lg:p-1 lg:px-0 last:hidden lg:last:block">
+        <div class="bg-grayish-white-200 pt-5 pb-3 px-1 lg:px-5 rounded-md h-full text-center lg:text-left">
 
             <p class="text-center text-sm" :title="day.values.dayOfWeek">
                 {{ day.values.dayOfWeek.substring(0, 3).toUpperCase() }}
@@ -15,13 +15,17 @@
                 >
             </div>
 
-            <div class="flex justify-center py-4">
-                <span class="text-xl lg:text-2xl mr-2">
-                    {{ Math.trunc(day.values.temperatureMax) }}°C
-                </span>
-                <span class="text-md lg:text-lg ml-2 text-gray-700">
-                    {{ Math.trunc(day.values.temperatureMin) }}°C
-                </span>
+            <div class="flex justify-center py-4 flex-col lg:flex-row">
+                <div class="w-full lg:w-6/12">
+                    <span class="text-xl lg:text-2xl mr-2">
+                        {{ Math.trunc(day.values.temperatureMax) }}°C
+                    </span>
+                </div>
+                <div class="w-full lg:w-6/12">
+                    <span class="text-md lg:text-lg ml-2 text-gray-700">
+                        {{ Math.trunc(day.values.temperatureMin) }}°C
+                    </span>
+                </div>
             </div>
 
             <p class="text-xs">

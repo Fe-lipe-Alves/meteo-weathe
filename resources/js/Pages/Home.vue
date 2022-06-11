@@ -6,7 +6,7 @@
         <Today :data-now="dataNow" :data-today="dataToday"/>
 
         <!-- Próximos Dias -->
-        <section class="w-11/12 mx-auto flex justify-between pt-14 flex-wrap">
+        <section class="w-full lg:w-11/12 mx-auto flex justify-between pt-14 px-1 lg:px-0 flex-wrap">
             <Day v-for="day in dataNextDays" :key="day.index" :day="day"/>
         </section>
         <!-- Próximos Dias -->

@@ -1,6 +1,6 @@
 <template>
 
-    <section class="w-11/12 mx-auto flex justify-between pt-14">
+    <section class="w-full lg:w-11/12 mx-auto px-1 lg:px-0 flex justify-between pt-14">
 
         <div class="bg-grayish-white-100 w-full pt-5 pb-3 px-5 rounded-md">
             <h4 class="text-2xl">
@@ -27,6 +27,10 @@
                                 :title="hour.values.weatherCodeDescription"
                                 class="w-12"
                             >
+                        </div>
+
+                        <div class="text-sm font-medium my-1" title="Temperatura">
+                            {{ Math.trunc(hour.values.temperatureApparent) }}°C
                         </div>
 
                         <div class="text-sm my-1 flex" title="Probabilidade de chuva">
